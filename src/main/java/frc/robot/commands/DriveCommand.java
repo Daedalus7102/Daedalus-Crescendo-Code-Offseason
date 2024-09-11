@@ -40,9 +40,9 @@ public class DriveCommand extends Command{
         zNeed = Math.abs(zNeed) > SwerveDriveConstants.kDeadband ? zNeed : 0.0;
 
         // 3. Make the driving smoother
-        xNeed = xLimiter.calculate(xNeed); 
-        yNeed = yLimiter.calculate(yNeed);
-        zNeed = zLimiter.calculate(zNeed);
+        xNeed = xLimiter.calculate(xNeed) * 20; //revisar valor de la constante
+        yNeed = yLimiter.calculate(yNeed) * 20; //revisar valor de la constante
+        zNeed = zLimiter.calculate(zNeed) * 20; //revisar valor de la constante
         
         drive.setFieldOrientedSpeed(xNeed, yNeed, zNeed);
 

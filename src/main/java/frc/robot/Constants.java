@@ -42,8 +42,8 @@ public class Constants {
         public static final double maxSpeed = 0.9;
 
         //Change these values accordinly to your needs (values for slew rate limiter)
-        public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 10;
-        public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 100;
+        public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 6;
+        public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 5;
 
         public static final double kDeadband = 0.05;
     }
@@ -66,6 +66,5 @@ public class Constants {
         public static final int arrowDown = 180;
         public static final int arrowLeft = 270;
     }
-
 
 }
