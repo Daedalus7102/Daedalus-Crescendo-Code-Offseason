@@ -18,6 +18,7 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.SwerveDriveConstants;
 
@@ -106,7 +107,7 @@ public class Drive extends SubsystemBase {
         backRight.swerveMotorsToCoast();
     }
 
-    public void setModuleStates(SwerveModuleState[] states){
+    private void setModuleStates(SwerveModuleState[] states){
         /* It is important to assign the values ​​of the array in this order because that is how it was
         declared each state separately and have to be assigned to the indicated one */
         frontLeft.setDesiredState(states[0], "Front Left");
@@ -115,24 +116,24 @@ public class Drive extends SubsystemBase {
         backRight.setDesiredState(states[3], "Back Right");
     }
 
-    public double getAngle(){
+    private double getAngle(){
         // Function to ask Pigeon the angle it is measuring
         return (this.gyro.getAngle())%360;
     }
 
-    public ChassisSpeeds getChassisSpeeds() {
+    private ChassisSpeeds getChassisSpeeds() {
     return new ChassisSpeeds(0, 0, 0);
     }
 
-    public void runVelcAuto(ChassisSpeeds speeds){
+    private void runVelcAuto(ChassisSpeeds speeds){
         setModuleStates(kinematics.toSwerveModuleStates(speeds));
     }
 
-    public ChassisSpeeds getFieldOrienteSpeeds(){
-        return ChassisSpeeds.fromRobotRelativeSpeeds(getChassisSpeeds(), getRotation2d());
-    }
+    // public ChassisSpeeds getFieldOrienteSpeeds(){
+    //     return ChassisSpeeds.fromRobotRelativeSpeeds(getChassisSpeeds(), getRotation2d());
+    // }
 
-    public Rotation2d getRotation2d(){
+    private Rotation2d getRotation2d(){
         return new Rotation2d(Math.toRadians(getAngle()));
     }
 
@@ -140,7 +141,7 @@ public class Drive extends SubsystemBase {
         return odometry.getPoseMeters();
     }
 
-    public void setOdoPose(Pose2d pose){
+    private void setOdoPose(Pose2d pose){
         positions[0] = frontLeft.getPosition();
         positions[1] = frontRight.getPosition();
         positions[2] = backLeft.getPosition();
@@ -193,6 +194,11 @@ public class Drive extends SubsystemBase {
         odometry.update(getRotation2d(), positions);
         poseEstimator.update(getRotation2d(), positions);
         
+        SmartDashboard.putNumber("TurnMotor angle frontLeft", this.frontLeft.getTurnEncoder());
+        SmartDashboard.putNumber("TurnMotor angle frontRight", this.frontRight.getTurnEncoder());
+        SmartDashboard.putNumber("TurnMotor angle backLeft", this.backLeft.getTurnEncoder());
+        SmartDashboard.putNumber("TurnMotor angle backright", this.backRight.getTurnEncoder());
+
         DataLogManager.start();
         DriverStation.startDataLog(DataLogManager.getLog());
         updateShuffle();

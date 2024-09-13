@@ -80,7 +80,7 @@ public class Constants {
 
         public static final int infraredSensorChannel = 9;
 
-        public static final double intakePivotMotorMaxOutput = 0.9;
+        public static final double intakePivotMotorMaxOutput = 0.7;
         public static final double intakeRollersMotorVelocitySuck = -0.6;
         public static final double intakeRollersMotorVelocityThrow = 0.8;
         public static final double intakeRollersMotorVelocityThrowForShooter = 0.7;

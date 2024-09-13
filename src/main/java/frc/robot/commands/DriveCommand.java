@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.SwerveDriveConstants;
 import frc.robot.subsystems.Drive.Drive;
 import edu.wpi.first.math.filter.SlewRateLimiter;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveCommand extends Command{
     Drive drive;
@@ -45,11 +44,6 @@ public class DriveCommand extends Command{
         zNeed = zLimiter.calculate(zNeed) * SwerveDriveConstants.kTeleDriveMaxAngularSpeedRadiansPerSecond;;
         
         drive.setFieldOrientedSpeed(xNeed, yNeed, zNeed);
-
-        SmartDashboard.putNumber("xSpeed", xNeed);
-        SmartDashboard.putNumber("ySpeed", yNeed);
-        SmartDashboard.putNumber("zSpeed", zNeed);
-
     }
 
     @Override

@@ -76,7 +76,11 @@ public class Module extends SubsystemBase{
     }
     
     public Rotation2d getAngle(){
-        return Rotation2d.fromDegrees(turnEncoder.getAbsolutePosition().getValue()*-360 + this.offset);
+        return Rotation2d.fromDegrees(getTurnEncoder());
+    }
+
+    public double getTurnEncoder(){
+        return turnEncoder.getAbsolutePosition().getValue()*-360 + this.offset;
     }
 
     public SwerveModuleState getSwerveState(){

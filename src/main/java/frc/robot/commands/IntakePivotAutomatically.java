@@ -25,7 +25,7 @@ import frc.robot.subsystems.Intake.Intake;
     @Override
     public void execute() {
       s_intake.setIntakePivotPosition(s_position);
-      s_intake.rollIntake(IntakeConstants.intakeRollersMotorVelocitySuck, true, false);
+      s_intake.rollIntake(IntakeConstants.intakeRollersMotorVelocitySuck, true, true);
     }
 
     // Called once the command ends or is interrupted.
@@ -33,6 +33,7 @@ import frc.robot.subsystems.Intake.Intake;
     public void end(boolean interrupted) {
       s_intake.stopIntakePivotMotor();
       s_intake.stopIntakeRollers();
+      s_intake.timeForIntaking.reset();
     }
 
     @Override

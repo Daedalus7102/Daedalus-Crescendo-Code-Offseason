@@ -16,8 +16,6 @@ import frc.robot.commands.IntakePivotAutomatically;
 import frc.robot.commands.IntakeRollersMoveManually;
 import frc.robot.subsystems.Drive.Drive;
 import frc.robot.subsystems.Intake.Intake;
-import frc.robot.utils.Alert;
-import frc.robot.utils.Alert.AlertType;
 
 public class RobotContainer {
   private static final Drive drive = new Drive();

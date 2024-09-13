@@ -1,12 +1,13 @@
 package frc.robot.subsystems.Intake;
 
 import com.ctre.phoenix6.hardware.CANcoder;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkBase.IdleMode;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.IntakeConstants;
@@ -19,6 +20,8 @@ public class Intake extends SubsystemBase{
 
   private final CANcoder pivotCANCoder = new CANcoder(IntakeConstants.pivotCANcoderID, "Drivetrain");
   private final PIDController pivotPID = new PIDController(IntakeConstants.Intake_kP, IntakeConstants.Intake_kI, IntakeConstants.Intake_kD);
+
+  public final Timer timeForIntaking = new Timer();
 
   private double goal; 
   private double PIDvalue;
@@ -34,7 +37,7 @@ public class Intake extends SubsystemBase{
     intakePivotMotor.setInverted(true);
 
     intakeRollersMotor.setIdleMode(IdleMode.kCoast);
-    intakePivotMotor.setIdleMode(IdleMode.kBrake);
+    intakePivotMotor.setIdleMode(IdleMode.kCoast);
   }
 
   public void pivotMotorCoast() {
@@ -44,19 +47,18 @@ public class Intake extends SubsystemBase{
     intakePivotMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
   }
 
-  public boolean getInfraredSensorValue(){
+  private boolean getInfraredSensorValue(){
     return !infraredSensor.get();
   }
 
   //Security method to avoid the intake from lowering more than expected
-  public double getIntakeEncoderPosition() {
+  private double getIntakeEncoderPosition() {
     intakeAngle = pivotCANCoder.getAbsolutePosition().getValue()*360 + IntakeConstants.intakeOffset; 
     if (intakeAngle >= 310 && intakeAngle <= 360){
       intakeAngle = 0;
     }
     return intakeAngle; 
   }
-
 
   public void setIntakePivotPosition(int position) {
     switch (position) {
@@ -91,29 +93,52 @@ public class Intake extends SubsystemBase{
     intakePivotMotor.set(0);
   }
 
-  public void moveIntakeRollers(double velocity){
-    intakeRollersMotor.set(velocity);
-  }
-
   public void stopIntakeRollers(){
     intakeRollersMotor.set(0);
   }
 
-  public double getIntakeRollersVelocity(){
-    return intakeRollersMotor.getEncoder().getVelocity();
+  private void moveIntakeRollersManually(double velocity){
+    intakeRollersMotor.set(velocity);
+  }
+
+  private void rollIntakeAutomatically(double intakeRollersVelocity){
+    if (getIntakeEncoderPosition() <= 35 && getIntakeEncoderPosition() >= 11 && goalIntakePosition == "Floor"){
+      moveIntakeRollersManually(intakeRollersVelocity);
+    }
+    else{
+      stopIntakeRollers();
+    }
+  }
+
+  public void activateSecutirySystem() {
+    timeForIntaking.start();
+    if (timeForIntaking.get() >= 2.5) {
+      stopIntakeRollers();
+      timeForIntaking.reset();
+    }
   }
 
   // Must indicate the parameter which gives the option to follow the feedback from the IR sensor
-  public void rollIntake(double intakeRollersVelocity, boolean setAutomaticRollingIntake, boolean activateSecutirySystem){
-    if (setAutomaticRollingIntake == true && goalIntakePosition == "Floor" && getIntakeEncoderPosition() <= 35 && getIntakeEncoderPosition() >= 11){
-      moveIntakeRollers(intakeRollersVelocity);
+  public void rollIntake(double intakeRollersVelocity, boolean setAutomaticRollingIntake, boolean activateSecutiryForIntakeAutomatic){
+    if (setAutomaticRollingIntake == true){
+      if (activateSecutiryForIntakeAutomatic == true && getInfraredSensorValue() == true && intakeRollersVelocity < -0.4 && goalIntakePosition == "Floor"){
+        timeForIntaking.start();
+        if (timeForIntaking.get() >= 1) {
+          stopIntakeRollers();
+          timeForIntaking.reset();
+        }
+      }
+      else {
+        rollIntakeAutomatically(intakeRollersVelocity);
+      }
     }
-    else{
-      //moveIntakeRollers(intakeRollersVelocity);
+    
+    else if (setAutomaticRollingIntake == false){
+      moveIntakeRollersManually(intakeRollersVelocity);
     }
   }
     
-  public double desaturatePIDValue(double s_PIDvalue) {
+  private double desaturatePIDValue(double s_PIDvalue) {
     if (s_PIDvalue > IntakeConstants.intakePivotMotorMaxOutput) {
       s_PIDvalue = IntakeConstants.intakePivotMotorMaxOutput;
     }
@@ -125,12 +150,10 @@ public class Intake extends SubsystemBase{
 
   public void periodic() {
     // 
-    SmartDashboard.putNumber("Intake rollers velocity", intakeRollersMotor.getEncoder().getVelocity());
+    SmartDashboard.putNumber("Time for intaking", timeForIntaking.get());
     SmartDashboard.putNumber("Pivot motor output current", intakePivotMotor.getOutputCurrent());
 
     SmartDashboard.putBoolean("Note detected", getInfraredSensorValue());
     SmartDashboard.putNumber("Pivot angle", getIntakeEncoderPosition());
-
-    SmartDashboard.putBoolean("condition", goalIntakePosition == "Floor" && getIntakeEncoderPosition() <= 35 && getIntakeEncoderPosition() >= 11);
   }
 }
