@@ -74,11 +74,11 @@ public class Constants {
     }
 
     public static final class IntakeConstants{
-        public static final int pivotMotorID = 12;
+        public static final int intakePivotMotorID = 12;
         public static final int intakeRollersMotorID = 9;
         public static final int pivotCANcoderID = 5;
 
-        public static final int infraredSensorChannel = 8;
+        public static final int infraredSensorChannel = 9;
 
         public static final double intakePivotMotorMaxOutput = 0.9;
         public static final double intakeRollersMotorVelocitySuck = -0.6;
@@ -87,8 +87,8 @@ public class Constants {
 
         public static final double floorGoalPosition = 18; //1
         public static final double ampGoalPosition = 128; //2
-        public static final double shooterGoalPosition = 180.5; //3
-        public static final double Intake_kP = 0.005;
+        public static final double shooterGoalPosition = 181.8; //3
+        public static final double Intake_kP = 0.0097;
         public static final double Intake_kI = 0;
         public static final double Intake_kD = 0;
 

@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.IntakeConstants;
 
 public class Intake extends SubsystemBase{
-  private final CANSparkMax pivotMotor = new CANSparkMax(IntakeConstants.pivotMotorID, MotorType.kBrushless);//9
+  private final CANSparkMax intakePivotMotor = new CANSparkMax(IntakeConstants.intakePivotMotorID, MotorType.kBrushless);//9
   private final CANSparkMax intakeRollersMotor = new CANSparkMax(IntakeConstants.intakeRollersMotorID, MotorType.kBrushless);//10
     
   private final DigitalInput infraredSensor =  new DigitalInput(IntakeConstants.infraredSensorChannel);
@@ -28,21 +28,20 @@ public class Intake extends SubsystemBase{
 
   public Intake() {
     intakeRollersMotor.restoreFactoryDefaults();
-    pivotMotor.restoreFactoryDefaults();
+    intakePivotMotor.restoreFactoryDefaults();
 
     intakeRollersMotor.setInverted(true);
-    pivotMotor.setInverted(true);
+    intakePivotMotor.setInverted(true);
 
     intakeRollersMotor.setIdleMode(IdleMode.kCoast);
-    pivotMotor.setIdleMode(IdleMode.kBrake);
+    intakePivotMotor.setIdleMode(IdleMode.kBrake);
   }
 
   public void pivotMotorCoast() {
-    pivotMotor.setIdleMode(CANSparkMax.IdleMode.kCoast);
+    intakePivotMotor.setIdleMode(CANSparkMax.IdleMode.kCoast);
   }
-
   public void pivotMotorBreak() {
-    pivotMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    intakePivotMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
   }
 
   public boolean getInfraredSensorValue(){
@@ -67,7 +66,7 @@ public class Intake extends SubsystemBase{
 
         PIDvalue = pivotPID.calculate(getIntakeEncoderPosition(), goal);
         PIDvalue = desaturatePIDValue(PIDvalue);
-        pivotMotor.set(PIDvalue);
+        intakePivotMotor.set(PIDvalue);
         break;
       case 2:
         goal = IntakeConstants.ampGoalPosition;
@@ -75,7 +74,7 @@ public class Intake extends SubsystemBase{
 
         PIDvalue = pivotPID.calculate(getIntakeEncoderPosition(), goal);
         PIDvalue = desaturatePIDValue(PIDvalue);
-        pivotMotor.set(PIDvalue);
+        intakePivotMotor.set(PIDvalue);
         break;
       case 3:
         goal = IntakeConstants.shooterGoalPosition;
@@ -83,13 +82,13 @@ public class Intake extends SubsystemBase{
 
         PIDvalue = pivotPID.calculate(getIntakeEncoderPosition(), goal);
         PIDvalue = desaturatePIDValue(PIDvalue);
-        pivotMotor.set(PIDvalue); 
+        intakePivotMotor.set(PIDvalue); 
         break;
     }   
 }
 
   public void stopIntakePivotMotor(){
-    pivotMotor.set(0);
+    intakePivotMotor.set(0);
   }
 
   public void moveIntakeRollers(double velocity){
@@ -124,14 +123,10 @@ public class Intake extends SubsystemBase{
     return s_PIDvalue;
   }
 
-  public void intakePivot(double velocidad) {
-    pivotMotor.set(velocidad);
-  }
-
   public void periodic() {
     // 
     SmartDashboard.putNumber("Intake rollers velocity", intakeRollersMotor.getEncoder().getVelocity());
-    SmartDashboard.putNumber("Pivot motor velocity", pivotMotor.getEncoder().getVelocity());
+    SmartDashboard.putNumber("Pivot motor output current", intakePivotMotor.getOutputCurrent());
 
     SmartDashboard.putBoolean("Note detected", getInfraredSensorValue());
     SmartDashboard.putNumber("Pivot angle", getIntakeEncoderPosition());

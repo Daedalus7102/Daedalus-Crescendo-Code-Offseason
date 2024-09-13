@@ -16,10 +16,15 @@ import frc.robot.commands.IntakePivotAutomatically;
 import frc.robot.commands.IntakeRollersMoveManually;
 import frc.robot.subsystems.Drive.Drive;
 import frc.robot.subsystems.Intake.Intake;
+import frc.robot.utils.Alert;
+import frc.robot.utils.Alert.AlertType;
 
 public class RobotContainer {
   private static final Drive drive = new Drive();
   private static final Intake intake = new Intake();
+
+  // private final Alert driverDisconnected = new Alert("Driver controller disconnected (this is a test).", AlertType.WARNING);
+  // private final Alert testing = new Alert("testing this", AlertType.ERROR);
 
   // private final Alert driverDisconnected = new Alert();
 
@@ -34,6 +39,11 @@ public class RobotContainer {
       )
     );
     configureBindings();
+
+    /*
+    driverDisconnected.set(true);
+    testing.set(true);
+  */
   }
 
 
