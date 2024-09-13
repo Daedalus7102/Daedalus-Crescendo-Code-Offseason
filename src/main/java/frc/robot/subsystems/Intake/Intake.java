@@ -123,7 +123,7 @@ public class Intake extends SubsystemBase{
     if (setAutomaticRollingIntake == true){
       if (activateSecutiryForIntakeAutomatic == true && getInfraredSensorValue() == true && intakeRollersVelocity < -0.4 && goalIntakePosition == "Floor"){
         timeForIntaking.start();
-        if (timeForIntaking.get() >= 1) {
+        if (timeForIntaking.get() >= 0.5) {
           stopIntakeRollers();
           timeForIntaking.reset();
         }
