@@ -33,7 +33,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledExit() {
-    // m_robotContainer.getChasisSubsystem().setChassisToBreak();
+    m_robotContainer.getChasisSubsystem().setChassisToBreak();
   }
 
   @Override

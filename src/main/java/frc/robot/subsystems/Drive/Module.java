@@ -2,13 +2,13 @@ package frc.robot.subsystems.Drive;
 
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.SwerveDriveConstants;
 
@@ -35,7 +35,7 @@ public class Module extends SubsystemBase{
 
         this.driveMotor.restoreFactoryDefaults();
         this.turnMotor.restoreFactoryDefaults(); 
-
+        
         this.turnEncoder = new CANcoder(CANcoderID, "Drivetrain");
         this.turnPID = new PIDController(kP, kI, kD);
 

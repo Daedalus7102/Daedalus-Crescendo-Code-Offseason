@@ -15,10 +15,10 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.Constants.SwerveDriveConstants;
 
 public class Drive extends SubsystemBase {
@@ -88,17 +88,8 @@ public class Drive extends SubsystemBase {
         SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeedsFieldOriented);
         
         // Method that limits all modules proportionally to maintain the desired behavior when moving the robot
-        SwerveDriveKinematics.desaturateWheelSpeeds(states, Constants.SwerveDriveConstants.maxSpeed);
+        SwerveDriveKinematics.desaturateWheelSpeeds(states, SwerveDriveConstants.chassisMaxOutput);
         setModuleStates(states);
-    }
-
-    public void setModuleStates(SwerveModuleState[] states){
-        /* It is important to assign the values ​​of the array in this order because that is how it was
-        declared each state separately and have to be assigned to the indicated one */
-        frontLeft.setDesiredState(states[0], "Front Left");
-        frontRight.setDesiredState(states[1], "Front Right");
-        backLeft.setDesiredState(states[2], "Back Left");
-        backRight.setDesiredState(states[3], "Back Right");
     }
 
     public void setChassisToBreak(){
@@ -115,13 +106,18 @@ public class Drive extends SubsystemBase {
         backRight.swerveMotorsToCoast();
     }
 
+    public void setModuleStates(SwerveModuleState[] states){
+        /* It is important to assign the values ​​of the array in this order because that is how it was
+        declared each state separately and have to be assigned to the indicated one */
+        frontLeft.setDesiredState(states[0], "Front Left");
+        frontRight.setDesiredState(states[1], "Front Right");
+        backLeft.setDesiredState(states[2], "Back Left");
+        backRight.setDesiredState(states[3], "Back Right");
+    }
+
     public double getAngle(){
         // Function to ask Pigeon the angle it is measuring
         return (this.gyro.getAngle())%360;
-    }
-
-    public void zeroHeading() {
-        gyro.reset();
     }
 
     public ChassisSpeeds getChassisSpeeds() {
@@ -152,6 +148,10 @@ public class Drive extends SubsystemBase {
 
         odometry.resetPosition(getRotation2d(), positions, pose);
         poseEstimator.resetPosition(getRotation2d(), positions, pose);
+    }
+
+    public void zeroHeading() {
+        gyro.reset();
     }
 
     public Drive(){
@@ -192,5 +192,9 @@ public class Drive extends SubsystemBase {
     public void periodic() {
         odometry.update(getRotation2d(), positions);
         poseEstimator.update(getRotation2d(), positions);
+        
+        DataLogManager.start();
+        DriverStation.startDataLog(DataLogManager.getLog());
+        updateShuffle();
     }
 }
