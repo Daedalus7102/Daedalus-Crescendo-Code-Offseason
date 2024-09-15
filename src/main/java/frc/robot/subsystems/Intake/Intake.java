@@ -112,21 +112,17 @@ public class Intake extends SubsystemBase{
 
   public void activateSecutirySystem() {
     timeForIntaking.start();
-    if (timeForIntaking.get() >= 2.5) {
+    if (timeForIntaking.get() >= 0.5) {
       stopIntakeRollers();
       timeForIntaking.reset();
     }
   }
-
+  
   // Must indicate the parameter which gives the option to follow the feedback from the IR sensor
   public void rollIntake(double intakeRollersVelocity, boolean setAutomaticRollingIntake, boolean activateSecutiryForIntakeAutomatic){
     if (setAutomaticRollingIntake == true){
       if (activateSecutiryForIntakeAutomatic == true && getInfraredSensorValue() == true && intakeRollersVelocity < -0.4 && goalIntakePosition == "Floor"){
-        timeForIntaking.start();
-        if (timeForIntaking.get() >= 0.5) {
-          stopIntakeRollers();
-          timeForIntaking.reset();
-        }
+        activateSecutirySystem();
       }
       else {
         rollIntakeAutomatically(intakeRollersVelocity);
@@ -152,6 +148,7 @@ public class Intake extends SubsystemBase{
     // 
     SmartDashboard.putNumber("Time for intaking", timeForIntaking.get());
     SmartDashboard.putNumber("Pivot motor output current", intakePivotMotor.getOutputCurrent());
+    SmartDashboard.putNumber("a", intakePivotMotor.getEncoder().getPosition());
 
     SmartDashboard.putBoolean("Note detected", getInfraredSensorValue());
     SmartDashboard.putNumber("Pivot angle", getIntakeEncoderPosition());

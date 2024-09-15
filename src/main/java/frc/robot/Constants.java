@@ -95,7 +95,10 @@ public class Constants {
         public static final double intakeOffset = -45.87890625;
     }
 
-    public static final class ConstantsShooter {
+    public static final class ShooterConstants {
+        public static final int shooterLowerMotorID = 11;
+        public static final int shooterUpperMotorID = 10;
+
         public static final double shooterMotorVelocity = 0.9;
     }
 

@@ -14,12 +14,17 @@ import frc.robot.Constants.IntakeConstants;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakePivotAutomatically;
 import frc.robot.commands.IntakeRollersMoveManually;
+import frc.robot.commands.ShooterCommands.ShootNote;
 import frc.robot.subsystems.Drive.Drive;
 import frc.robot.subsystems.Intake.Intake;
+import frc.robot.subsystems.Shooter.Shooter;
 
 public class RobotContainer {
   private static final Drive drive = new Drive();
   private static final Intake intake = new Intake();
+  
+  // This subsystem needs the intake subsystem to be able to work
+  private static final Shooter shooter = new Shooter(intake);
 
   // private final Alert driverDisconnected = new Alert("Driver controller disconnected (this is a test).", AlertType.WARNING);
   // private final Alert testing = new Alert("testing this", AlertType.ERROR);
@@ -61,8 +66,9 @@ public class RobotContainer {
     new POVButton(mecanismsControl, IOConstants.arrowLeft).whileTrue(new IntakePivotAutomatically(intake, 1)); //Floor
     new JoystickButton(mecanismsControl, IOConstants.bumperRight).toggleOnTrue(new IntakePivotAutomatically(intake, 2)); //Amp    
     new JoystickButton(mecanismsControl, IOConstants.bumoerLeft).toggleOnTrue(new IntakePivotAutomatically(intake, 3)); //Shooter
-
     new POVButton(mecanismsControl, IOConstants.arrowLeft).whileFalse(new IntakePivotAutomatically(intake, 3)); //Shooter
+
+    new JoystickButton(mecanismsControl, IOConstants.buttonTriangle).whileTrue(new ShootNote(shooter, intake));
 
   }
 
