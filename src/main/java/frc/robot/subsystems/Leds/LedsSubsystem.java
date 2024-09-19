@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj.Timer;
 import java.util.Random;
-public class Leds extends SubsystemBase {
+public class LedsSubsystem extends SubsystemBase {
   
-  public Leds() {m_led.setLength(m_ledBuffer.getLength()); m_led.start(); timer.start();}
+  public LedsSubsystem() {m_led.setLength(m_ledBuffer.getLength()); m_led.start(); timer.start();}
   // -- CONFIG -- //
   private static final int HALF_LENGTH = 25; // La mitad de la cantidad de leds que hay
   private static final int PORT = 0; // El puerto PWM en el que se conectan los leds

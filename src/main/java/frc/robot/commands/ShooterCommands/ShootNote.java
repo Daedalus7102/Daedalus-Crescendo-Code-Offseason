@@ -5,10 +5,10 @@
 package frc.robot.commands.ShooterCommands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.Intake.Intake;
 import frc.robot.subsystems.Shooter.Shooter;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.ShooterConstants;
-import frc.robot.subsystems.Intake.Intake;
 
 public class ShootNote extends Command {
   private final Shooter s_shooter;
@@ -36,7 +36,6 @@ public class ShootNote extends Command {
   public void end(boolean interrupted) {
     s_shooter.stopShooter();
     s_intake.stopIntakeRollers();
-    shooterTimer.stop();
     shooterTimer.reset();
   }
 

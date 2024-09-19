@@ -27,6 +27,7 @@ public class Intake extends SubsystemBase{
   private double PIDvalue;
   public String goalIntakePosition;
   private double intakeAngle;
+  public PivotPosition position = PivotPosition.SHOOTER;
 
 
   public Intake() {
@@ -60,9 +61,25 @@ public class Intake extends SubsystemBase{
     return intakeAngle; 
   }
 
-  public void setIntakePivotPosition(int position) {
+private double desaturatePIDValue(double s_PIDvalue) {
+    if (s_PIDvalue > IntakeConstants.intakePivotMotorMaxOutput) {
+      s_PIDvalue = IntakeConstants.intakePivotMotorMaxOutput;
+    }
+    else if (s_PIDvalue < -IntakeConstants.intakePivotMotorMaxOutput) {
+      s_PIDvalue = -IntakeConstants.intakePivotMotorMaxOutput;
+    }
+    return s_PIDvalue;
+  }
+
+  public enum PivotPosition{
+    FLOOR,
+    AMP,
+    SHOOTER
+  }
+
+  public void setIntakePivotPosition(PivotPosition position) {
     switch (position) {
-      case 1:
+      case FLOOR:
         goal = IntakeConstants.floorGoalPosition;
         goalIntakePosition = "Floor";
 
@@ -70,7 +87,7 @@ public class Intake extends SubsystemBase{
         PIDvalue = desaturatePIDValue(PIDvalue);
         intakePivotMotor.set(PIDvalue);
         break;
-      case 2:
+      case AMP:
         goal = IntakeConstants.ampGoalPosition;
         goalIntakePosition = "Amp";
 
@@ -78,7 +95,7 @@ public class Intake extends SubsystemBase{
         PIDvalue = desaturatePIDValue(PIDvalue);
         intakePivotMotor.set(PIDvalue);
         break;
-      case 3:
+      case SHOOTER:
         goal = IntakeConstants.shooterGoalPosition;
         goalIntakePosition = "Shooter";
 
@@ -96,53 +113,32 @@ public class Intake extends SubsystemBase{
   public void stopIntakeRollers(){
     intakeRollersMotor.set(0);
   }
-
-  private void moveIntakeRollersManually(double velocity){
-    intakeRollersMotor.set(velocity);
-  }
-
-  private void rollIntakeAutomatically(double intakeRollersVelocity){
-    if (getIntakeEncoderPosition() <= 35 && getIntakeEncoderPosition() >= 11 && goalIntakePosition == "Floor"){
-      moveIntakeRollersManually(intakeRollersVelocity);
-    }
-    else{
-      stopIntakeRollers();
-    }
-  }
-
-  public void activateSecutirySystem() {
-    timeForIntaking.start();
-    if (timeForIntaking.get() >= 0.5) {
-      stopIntakeRollers();
-      timeForIntaking.reset();
-    }
-  }
   
+  private void rollIntakeAutomatically(double intakeRollersVelocity, boolean intakeAutomativally){
+    if (intakeAutomativally == true) {
+        if (getIntakeEncoderPosition() <= 35 && getIntakeEncoderPosition() >= 11 && goalIntakePosition == "Floor"){
+        intakeRollersMotor.set(intakeRollersVelocity);
+        } else{
+        stopIntakeRollers();
+        }
+    } else {
+        intakeRollersMotor.set(intakeRollersVelocity);
+    }
+  }
+
+  public void rollIntake(double intakeRollersVelocity, boolean intakeAutomativally, boolean activateSecutirySystem) {    
+    if (activateSecutirySystem == true && getInfraredSensorValue() == true && intakeRollersVelocity < -0.4) {
+        timeForIntaking.start();
+        if (timeForIntaking.get() >= 0.5) {
+        stopIntakeRollers();
+        timeForIntaking.reset();
+        }
+    } else {
+      rollIntakeAutomatically(intakeRollersVelocity, intakeAutomativally);
+    }
+  }
+
   // Must indicate the parameter which gives the option to follow the feedback from the IR sensor
-  public void rollIntake(double intakeRollersVelocity, boolean setAutomaticRollingIntake, boolean activateSecutiryForIntakeAutomatic){
-    if (setAutomaticRollingIntake == true){
-      if (activateSecutiryForIntakeAutomatic == true && getInfraredSensorValue() == true && intakeRollersVelocity < -0.4 && goalIntakePosition == "Floor"){
-        activateSecutirySystem();
-      }
-      else {
-        rollIntakeAutomatically(intakeRollersVelocity);
-      }
-    }
-    
-    else if (setAutomaticRollingIntake == false){
-      moveIntakeRollersManually(intakeRollersVelocity);
-    }
-  }
-    
-  private double desaturatePIDValue(double s_PIDvalue) {
-    if (s_PIDvalue > IntakeConstants.intakePivotMotorMaxOutput) {
-      s_PIDvalue = IntakeConstants.intakePivotMotorMaxOutput;
-    }
-    else if (s_PIDvalue < -IntakeConstants.intakePivotMotorMaxOutput) {
-      s_PIDvalue = -IntakeConstants.intakePivotMotorMaxOutput;
-    }
-    return s_PIDvalue;
-  }
 
   public void periodic() {
     // 

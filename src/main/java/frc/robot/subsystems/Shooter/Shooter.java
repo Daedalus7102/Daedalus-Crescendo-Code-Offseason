@@ -1,5 +1,6 @@
 package frc.robot.subsystems.Shooter;
 
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 
@@ -17,7 +18,10 @@ public class Shooter extends SubsystemBase{
     this.s_intake = s_intake;
 
     shooterLowerMotor.setInverted(false);
-    shooterUpperMotor.setInverted(true);
+    shooterUpperMotor.setInverted(false);
+
+    shooterLowerMotor.setIdleMode(IdleMode.kCoast);
+    shooterUpperMotor.setIdleMode(IdleMode.kCoast);
   }
 
   public void moveShooterRollers(double velocity) {

@@ -1,5 +1,5 @@
 package frc.robot.subsystems.Shooter;
 
-public class ShooterIO {
+public class ShooterIOSparkMax {
     
 }

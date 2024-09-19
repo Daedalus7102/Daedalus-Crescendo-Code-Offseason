@@ -9,12 +9,11 @@ import frc.robot.subsystems.Intake.Intake;
 public class IntakeRollersMoveManually extends Command {
 
   private final Intake s_intake;
-  private final double velocity;
+  private final double intake_velocity;
 
-  public IntakeRollersMoveManually(Intake s_intake, double velocity) {
+  public IntakeRollersMoveManually(Intake s_intake, double intake_velocity) {
     this.s_intake = s_intake;
-    this.velocity = velocity;
-    addRequirements(s_intake);
+    this.intake_velocity = intake_velocity;
   }
 
   // Called when the command is initially scheduled.
@@ -24,7 +23,7 @@ public class IntakeRollersMoveManually extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    s_intake.rollIntake(velocity, false, false);
+    s_intake.rollIntake(intake_velocity, false, false);
   }
 
   // Called once the command ends or is interrupted.

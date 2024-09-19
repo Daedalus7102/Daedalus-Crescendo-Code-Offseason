@@ -6,14 +6,15 @@
   import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.subsystems.Intake.Intake;
+import frc.robot.subsystems.Intake.Intake.PivotPosition;
 
   public class IntakePivotAutomatically extends Command {
     private final Intake s_intake;
-    private final int s_position;
+    private final PivotPosition pivot_position;
 
-    public IntakePivotAutomatically(Intake s_intake, int s_position) {
+    public IntakePivotAutomatically(Intake s_intake, PivotPosition pivot_position) {
       this.s_intake = s_intake;
-      this.s_position = s_position;
+      this.pivot_position = pivot_position;
       addRequirements(s_intake);
     }
 
@@ -24,7 +25,7 @@ import frc.robot.subsystems.Intake.Intake;
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-      s_intake.setIntakePivotPosition(s_position);
+      s_intake.setIntakePivotPosition(pivot_position);
       s_intake.rollIntake(IntakeConstants.intakeRollersMotorVelocitySuck, true, true);
     }
 

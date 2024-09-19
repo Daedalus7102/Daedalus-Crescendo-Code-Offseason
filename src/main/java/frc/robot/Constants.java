@@ -2,26 +2,7 @@ package frc.robot;
 
 public class Constants {
 
-    public static final class IOConstants {
-        public static final int PortID = 0;
-        public static final int PortID_1 = 1; //Port detected by the FRC Driver Station of the control to be used
-        
-        /* Values ​​obtained experimentally through the FRC Driver Station */
-        public static final int buttonSquare = 1;
-        public static final int buttonCross = 2;
-        public static final int buttonCircle = 3;
-        public static final int buttonTriangle = 4;
-        public static final int bumperRight = 6;
-        public static final int bumoerLeft = 5;
-        public static final int triggerLeft = 7;
-        public static final int triggerRight = 8;
-        public static final int arrowUp = 0;
-        public static final int arrowRight = 90;
-        public static final int arrowDown = 180;
-        public static final int arrowLeft = 270;
-    }
-
-    public static final class SwerveDriveConstants{
+    public static final class SwerveDriveConstants {
         //Front Left Module Information (Used in the "Chassi" class)
         public static final int driveMotorIDfrontLeft = 3;
         public static final int turnMotorIDfrontLeft = 1;
@@ -73,7 +54,7 @@ public class Constants {
         public static final double kDeadband = 0.05;
     }
 
-    public static final class IntakeConstants{
+    public static final class IntakeConstants {
         public static final int intakePivotMotorID = 12;
         public static final int intakeRollersMotorID = 9;
         public static final int pivotCANcoderID = 5;

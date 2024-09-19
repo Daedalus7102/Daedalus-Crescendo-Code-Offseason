@@ -4,12 +4,9 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
-import frc.robot.Constants.IOConstants;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakePivotAutomatically;
@@ -17,30 +14,24 @@ import frc.robot.commands.IntakeRollersMoveManually;
 import frc.robot.commands.ShooterCommands.ShootNote;
 import frc.robot.subsystems.Drive.Drive;
 import frc.robot.subsystems.Intake.Intake;
+import frc.robot.subsystems.Intake.Intake.PivotPosition;
 import frc.robot.subsystems.Shooter.Shooter;
 
 public class RobotContainer {
-  private static final Drive drive = new Drive();
-  private static final Intake intake = new Intake();
-  
-  // This subsystem needs the intake subsystem to be able to work
-  private static final Shooter shooter = new Shooter(intake);
+  // Subsystems
+  public Drive drive = new Drive();
+  public Intake intake = new Intake();
+  public Shooter shooter = new Shooter(intake);
+
+  // Controllers
+  public static final CommandPS4Controller driverController = new CommandPS4Controller(0);
+  public static final CommandPS4Controller operatorController = new CommandPS4Controller(1);
 
   // private final Alert driverDisconnected = new Alert("Driver controller disconnected (this is a test).", AlertType.WARNING);
   // private final Alert testing = new Alert("testing this", AlertType.ERROR);
-
   // private final Alert driverDisconnected = new Alert();
 
   public RobotContainer() {
-
-    drive.setDefaultCommand(
-      new DriveCommand(
-        drive,
-        () -> (-driveControl.getRawAxis(1)),
-        () -> (driveControl.getRawAxis(0)),
-        () -> (-driveControl.getRawAxis(2))
-      )
-    );
     configureBindings();
 
     /*
@@ -49,26 +40,35 @@ public class RobotContainer {
   */
   }
 
-
-  private static final PS4Controller driveControl = new PS4Controller(0);
-  public static final PS4Controller mecanismsControl = new PS4Controller(1);
-
   private void configureBindings() {
-    // Chassis driver controls
-    new JoystickButton(driveControl, IOConstants.buttonTriangle).whileTrue(new RunCommand(drive::zeroHeading));
-    new JoystickButton(driveControl, IOConstants.triggerRight).whileTrue(new IntakePivotAutomatically(intake, 1)); //Floor
-    new JoystickButton(driveControl, IOConstants.triggerRight).whileFalse(new IntakePivotAutomatically(intake, 3)); //Shooter
+    // ----------- Driver Controller -----------
+    drive.setDefaultCommand(
+      new DriveCommand(
+        drive,
+        () -> (-driverController.getLeftX()),
+        () -> (driverController.getLeftY()),
+        () -> (-driverController.getRightX())
+      )
+    );
 
-    // Mechanisms driver controls
-    new JoystickButton(mecanismsControl, IOConstants.triggerRight).whileTrue(new IntakeRollersMoveManually(intake, IntakeConstants.intakeRollersMotorVelocityThrow));
-    new JoystickButton(mecanismsControl, IOConstants.triggerLeft).whileTrue(new IntakeRollersMoveManually(intake, IntakeConstants.intakeRollersMotorVelocitySuck));
+    // // driverController.cross().onTrue();
+
+    driverController.triangle().whileTrue(new InstantCommand(() -> drive.zeroHeading()));
+    driverController.R2().whileTrue(new IntakePivotAutomatically(intake, PivotPosition.FLOOR))
+                        .whileFalse(new IntakePivotAutomatically(intake, PivotPosition.SHOOTER));
+
     
-    new POVButton(mecanismsControl, IOConstants.arrowLeft).whileTrue(new IntakePivotAutomatically(intake, 1)); //Floor
-    new JoystickButton(mecanismsControl, IOConstants.bumperRight).toggleOnTrue(new IntakePivotAutomatically(intake, 2)); //Amp    
-    new JoystickButton(mecanismsControl, IOConstants.bumoerLeft).toggleOnTrue(new IntakePivotAutomatically(intake, 3)); //Shooter
-    new POVButton(mecanismsControl, IOConstants.arrowLeft).whileFalse(new IntakePivotAutomatically(intake, 3)); //Shooter
+    // ----------- Operator Controller -----------
+    operatorController.R2().whileTrue(new IntakeRollersMoveManually(intake, IntakeConstants.intakeRollersMotorVelocityThrow));
+    operatorController.L2().whileTrue(new IntakeRollersMoveManually(intake, IntakeConstants.intakeRollersMotorVelocitySuck));
 
-    new JoystickButton(mecanismsControl, IOConstants.buttonTriangle).whileTrue(new ShootNote(shooter, intake));
+    operatorController.povLeft().whileTrue(new IntakePivotAutomatically(intake, PivotPosition.FLOOR))
+                                .whileFalse(new IntakePivotAutomatically(intake, PivotPosition.SHOOTER));
+
+    operatorController.R1().whileTrue(new IntakePivotAutomatically(intake, PivotPosition.AMP));
+    operatorController.L1().whileTrue(new IntakePivotAutomatically(intake, PivotPosition.SHOOTER));
+
+    operatorController.triangle().toggleOnTrue(new ShootNote(shooter, intake));
 
   }
 
