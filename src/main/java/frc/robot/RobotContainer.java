@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.commands.DriveCommand;
-import frc.robot.commands.IntakePivotAutomatically;
-import frc.robot.commands.IntakeRollersMoveManually;
-import frc.robot.commands.ShooterCommands.ShootNote;
+import frc.robot.commands.IntakeCommands.IntakePivotAutomatically;
+import frc.robot.commands.IntakeCommands.IntakeRollersMoveManually;
+import frc.robot.commands.ShooterCommands.ShootNoteCommand;
 import frc.robot.subsystems.Drive.Drive;
 import frc.robot.subsystems.Intake.Intake;
 import frc.robot.subsystems.Intake.Intake.PivotPosition;
@@ -22,6 +22,8 @@ public class RobotContainer {
   public Drive drive = new Drive();
   public Intake intake = new Intake();
   public Shooter shooter = new Shooter(intake);
+
+  // IntakePivotAutomatically intakeCommand = new IntakePivotAutomatically(intake, null);
 
   // Controllers
   public static final CommandPS4Controller driverController = new CommandPS4Controller(0);
@@ -68,7 +70,7 @@ public class RobotContainer {
     operatorController.R1().whileTrue(new IntakePivotAutomatically(intake, PivotPosition.AMP));
     operatorController.L1().whileTrue(new IntakePivotAutomatically(intake, PivotPosition.SHOOTER));
 
-    operatorController.triangle().toggleOnTrue(new ShootNote(shooter, intake));
+    operatorController.triangle().toggleOnTrue(new ShootNoteCommand(shooter, intake));
 
   }
 
