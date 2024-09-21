@@ -10,324 +10,7 @@
         "hgap": 16.0,
         "vgap": 16.0,
         "titleType": 0,
-        "tiles": {
-          "7,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Note detected",
-              "_title": "Note detected",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "8,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Pivot angle",
-              "_title": "Pivot angle",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "2,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Ready for shoot",
-              "_title": "Ready for shoot",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "0,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight_PipelineName",
-              "_title": "limelight_PipelineName",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight_Interface",
-              "_title": "limelight_Interface",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "4,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight_Stream",
-              "_title": "limelight_Stream",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "5,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight-intake_Interface",
-              "_title": "limelight-intake_Interface",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "6,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight-intake_Stream",
-              "_title": "limelight-intake_Stream",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "9,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight-intake_PipelineName",
-              "_title": "limelight-intake_PipelineName",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "10,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/TurnMotor angle frontLeft",
-              "_title": "TurnMotor angle frontLeft",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "0,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/TurnMotor angle frontRight",
-              "_title": "TurnMotor angle frontRight",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/TurnMotor angle backLeft",
-              "_title": "TurnMotor angle backLeft",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "2,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/TurnMotor angle backright",
-              "_title": "TurnMotor angle backright",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "3,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Time for intaking",
-              "_title": "Time for intaking",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "4,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Pivot motor output current",
-              "_title": "Pivot motor output current",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "5,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/TurnMotor frontLeft angle",
-              "_title": "TurnMotor frontLeft angle",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "6,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/TurnMotor frontRigh anglet",
-              "_title": "TurnMotor frontRigh anglet",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "7,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/TurnMotor backLeft angle",
-              "_title": "TurnMotor backLeft angle",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "8,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/TurnMotor backright angle",
-              "_title": "TurnMotor backright angle",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "9,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/DriveMotor frontLeft output",
-              "_title": "DriveMotor frontLeft output",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "10,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/DriveMotor frontRigh output",
-              "_title": "DriveMotor frontRigh output",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "0,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/DriveMotor backLeft output",
-              "_title": "DriveMotor backLeft output",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/DriveMotor backright output",
-              "_title": "DriveMotor backright output",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "2,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro value",
-              "_title": "Gyro value",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          }
-        }
+        "tiles": {}
       }
     },
     {
@@ -369,36 +52,40 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "5,1": {
+          "4,0": {
             "size": [
               2,
-              1
+              2
             ],
             "content": {
-              "_type": "Text View",
+              "_type": "Simple Dial",
               "_source0": "network_table:///SmartDashboard/Pivot angle",
               "_title": "Pivot angle",
               "_glyph": 148,
-              "_showGlyph": false
+              "_showGlyph": false,
+              "Range/Min": 18.0,
+              "Range/Max": 181.8,
+              "Visuals/Show value": true
             }
           },
-          "5,3": {
+          "0,2": {
             "size": [
-              2,
-              1
+              10,
+              4
             ],
             "content": {
-              "_type": "Number Bar",
+              "_type": "Graph",
               "_source0": "network_table:///SmartDashboard/Pivot motor output current",
               "_title": "Pivot motor output current",
               "_glyph": 148,
               "_showGlyph": false,
-              "Range/Min": -1.0,
-              "Range/Max": 1.0,
-              "Range/Center": 0.0,
-              "Visuals/Num tick marks": 5,
-              "Visuals/Show text": true,
-              "Visuals/Orientation": "HORIZONTAL"
+              "Graph/Visible time": 30.0,
+              "Graph/X-axis auto scrolling": true,
+              "Y-axis/Automatic bounds": true,
+              "Y-axis/Upper bound": 1.0,
+              "Y-axis/Lower bound": -1.0,
+              "Y-axis/Unit": "ul",
+              "Visible data/SmartDashboard/Pivot motor output current": true
             }
           },
           "7,1": {
@@ -428,71 +115,7 @@
         "vgap": 16.0,
         "titleType": 0,
         "tiles": {
-          "1,4": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Simple Dial",
-              "_source0": "network_table:///SmartDashboard/TurnMotor angle backLeft",
-              "_title": "TurnMotor angle backLeft",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Range/Min": 0.0,
-              "Range/Max": 360.0,
-              "Visuals/Show value": true
-            }
-          },
-          "7,4": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Simple Dial",
-              "_source0": "network_table:///SmartDashboard/TurnMotor angle backright",
-              "_title": "TurnMotor angle backright",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Range/Min": 0.0,
-              "Range/Max": 360.0,
-              "Visuals/Show value": true
-            }
-          },
-          "1,0": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Simple Dial",
-              "_source0": "network_table:///SmartDashboard/TurnMotor angle frontLeft",
-              "_title": "TurnMotor angle frontLeft",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Range/Min": 0.0,
-              "Range/Max": 360.0,
-              "Visuals/Show value": true
-            }
-          },
-          "7,0": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Simple Dial",
-              "_source0": "network_table:///SmartDashboard/TurnMotor angle frontRight",
-              "_title": "TurnMotor angle frontRight",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Range/Min": 0.0,
-              "Range/Max": 360.0,
-              "Visuals/Show value": true
-            }
-          },
-          "3,4": {
+          "2,4": {
             "size": [
               2,
               2
@@ -508,23 +131,7 @@
               "Visuals/Show value": true
             }
           },
-          "9,4": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Simple Dial",
-              "_source0": "network_table:///SmartDashboard/DriveMotor backright output",
-              "_title": "DriveMotor backright output",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Range/Min": -225.0,
-              "Range/Max": 225.0,
-              "Visuals/Show value": true
-            }
-          },
-          "3,0": {
+          "2,0": {
             "size": [
               2,
               2
@@ -554,6 +161,103 @@
               "Range/Min": -225.0,
               "Range/Max": 225.0,
               "Visuals/Show value": true
+            }
+          },
+          "0,4": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Simple Dial",
+              "_source0": "network_table:///SmartDashboard/TurnMotor backLeft angle",
+              "_title": "TurnMotor backLeft angle",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Range/Min": 0.0,
+              "Range/Max": 360.0,
+              "Visuals/Show value": true
+            }
+          },
+          "7,4": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Simple Dial",
+              "_source0": "network_table:///SmartDashboard/TurnMotor backright angle",
+              "_title": "TurnMotor backright angle",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Range/Min": 0.0,
+              "Range/Max": 360.0,
+              "Visuals/Show value": true
+            }
+          },
+          "0,0": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Simple Dial",
+              "_source0": "network_table:///SmartDashboard/TurnMotor frontLeft angle",
+              "_title": "TurnMotor frontLeft angle",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Range/Min": 0.0,
+              "Range/Max": 360.0,
+              "Visuals/Show value": true
+            }
+          },
+          "7,0": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Simple Dial",
+              "_source0": "network_table:///SmartDashboard/TurnMotor frontRigh anglet",
+              "_title": "TurnMotor frontRigh anglet",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Range/Min": 0.0,
+              "Range/Max": 360.0,
+              "Visuals/Show value": true
+            }
+          },
+          "9,4": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Simple Dial",
+              "_source0": "network_table:///SmartDashboard/DriveMotor frontLeft output",
+              "_title": "DriveMotor frontLeft output",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Range/Min": -225.0,
+              "Range/Max": 225.0,
+              "Visuals/Show value": true
+            }
+          },
+          "4,2": {
+            "size": [
+              3,
+              2
+            ],
+            "content": {
+              "_type": "Gyro",
+              "_source0": "network_table:///SmartDashboard/Gyro value",
+              "_title": "SmartDashboard/Gyro value",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Visuals/Major tick spacing": 45.0,
+              "Visuals/Starting angle": 180.0,
+              "Visuals/Show tick mark ring": true,
+              "Visuals/Counter clockwise": false
             }
           }
         }
