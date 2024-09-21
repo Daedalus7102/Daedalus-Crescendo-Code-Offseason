@@ -10,12 +10,12 @@ import frc.robot.subsystems.Shooter.Shooter;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.ShooterConstants;
 
-public class ShootNoteCommand extends Command {
+public class ShootCommand extends Command {
   private final Shooter s_shooter;
   private final Intake s_intake;
   private Timer shooterTimer = new Timer();
 
-  public ShootNoteCommand(Shooter s_shooter, Intake s_intake) {
+  public ShootCommand(Shooter s_shooter, Intake s_intake) {
     this.s_shooter = s_shooter;
     this.s_intake = s_intake;
     addRequirements(s_shooter);

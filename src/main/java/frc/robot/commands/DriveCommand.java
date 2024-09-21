@@ -11,14 +11,17 @@ public class DriveCommand extends Command{
     Drive drive;
     Supplier<Double> xSpeed, ySpeed, zSpeed;
     private final SlewRateLimiter xLimiter, yLimiter, zLimiter;
+    private boolean robotRelative = false;
 
-    public DriveCommand(Drive drive, Supplier<Double> xSpeed, Supplier<Double> ySpeed, Supplier<Double> zSpeed){
+    public DriveCommand(Drive drive, Supplier<Double> xSpeed, Supplier<Double> ySpeed, Supplier<Double> zSpeed, boolean robotRelative){
         addRequirements(drive);
         this.drive = drive;
 
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
         this.zSpeed = zSpeed;
+
+        this.robotRelative = robotRelative;
 
         this.xLimiter = new SlewRateLimiter(SwerveDriveConstants.kTeleDriveMaxAccelerationUnitsPerSecond);
         this.yLimiter = new SlewRateLimiter(SwerveDriveConstants.kTeleDriveMaxAccelerationUnitsPerSecond);
@@ -43,7 +46,7 @@ public class DriveCommand extends Command{
         yNeed = yLimiter.calculate(yNeed) * SwerveDriveConstants.kTeleDriveMaxSpeedMetersPerSecond;; 
         zNeed = zLimiter.calculate(zNeed) * SwerveDriveConstants.kTeleDriveMaxAngularSpeedRadiansPerSecond;;
         
-        drive.setFieldOrientedSpeed(xNeed, yNeed, zNeed);
+        drive.setChassisSpeeds(xNeed, yNeed, zNeed, robotRelative);
     }
 
     @Override

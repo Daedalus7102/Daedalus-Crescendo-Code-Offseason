@@ -1,5 +1,7 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 public class Constants {
 
     public static final class SwerveDriveConstants {
@@ -48,7 +50,7 @@ public class Constants {
 
 
         //Change these values accordinly to your needs (values for slew rate limiter)
-        public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 1.7;
+        public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 0.8;
         public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 1.7;
 
         public static final double kDeadband = 0.05;
@@ -74,6 +76,7 @@ public class Constants {
         public static final double Intake_kD = 0;
 
         public static final double intakeOffset = -45.87890625;
+        public static final double timeForIntaking = 0.7;
     }
 
     public static final class ShooterConstants {
@@ -83,4 +86,22 @@ public class Constants {
         public static final double shooterMotorVelocity = 0.9;
     }
 
+    public static final class ClimberConstants {
+        public static final DoubleSolenoid.Value rise = DoubleSolenoid.Value.kForward;
+        public static final DoubleSolenoid.Value lower = DoubleSolenoid.Value.kReverse;
+        public static final DoubleSolenoid.Value stop = DoubleSolenoid.Value.kOff;
+    }
+
+    public static class AimbotConstants {
+        public static double targetTXAimbotSpeaker = -8.41;
+        public static double targetTYAimbotSpeaker = 1.63;
+
+        public static final double xAprilTagThreshold = 5;
+        public static final double yApriltagThreshold = 2;
+
+        public static final double zDriveMaxSpeed = 0.8;
+        public static final double yDriveMaxSpeed = 0.8;
+        public static final double kPdriveY = 0.06;
+        public static final double kPdriveZ = 0.24;
+    }
 }

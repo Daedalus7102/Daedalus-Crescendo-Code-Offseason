@@ -78,7 +78,7 @@ public class Drive extends SubsystemBase {
     SwerveDrivePoseEstimator poseEstimator = new SwerveDrivePoseEstimator(kinematics, getRotation2d(), positions, new Pose2d(0, 0, getRotation2d()));
 
     // Method that would be used if we did not want the robot to have court orientation (this way does not implement the gyroscope)
-    public void setChassisSpeeds(double xSpeed, double ySpeed, double zSpeed){
+    public void setRobotRelativeSpeeds(double xSpeed, double ySpeed, double zSpeed){
         SwerveModuleState[] states = kinematics.toSwerveModuleStates(new ChassisSpeeds(xSpeed, ySpeed, zSpeed));
     
         setModuleStates(states);
@@ -91,6 +91,14 @@ public class Drive extends SubsystemBase {
         // Method that limits all modules proportionally to maintain the desired behavior when moving the robot
         SwerveDriveKinematics.desaturateWheelSpeeds(states, SwerveDriveConstants.chassisMaxOutput);
         setModuleStates(states);
+    }
+
+    public void setChassisSpeeds(double xSpeed, double ySpeed, double zSpeed, boolean robotRelative) {
+        if (robotRelative == false) {
+            setFieldOrientedSpeed(xSpeed, ySpeed, zSpeed);
+        } else {
+            setRobotRelativeSpeeds(xSpeed, ySpeed, zSpeed);
+        }
     }
 
     public void setChassisToBreak(){
@@ -194,10 +202,17 @@ public class Drive extends SubsystemBase {
         odometry.update(getRotation2d(), positions);
         poseEstimator.update(getRotation2d(), positions);
         
-        SmartDashboard.putNumber("TurnMotor angle frontLeft", this.frontLeft.getTurnEncoder());
-        SmartDashboard.putNumber("TurnMotor angle frontRight", this.frontRight.getTurnEncoder());
-        SmartDashboard.putNumber("TurnMotor angle backLeft", this.backLeft.getTurnEncoder());
-        SmartDashboard.putNumber("TurnMotor angle backright", this.backRight.getTurnEncoder());
+        SmartDashboard.putNumber("TurnMotor frontLeft angle", this.frontLeft.getTurnEncoder());
+        SmartDashboard.putNumber("TurnMotor frontRigh anglet", this.frontRight.getTurnEncoder());
+        SmartDashboard.putNumber("TurnMotor backLeft angle", this.backLeft.getTurnEncoder());
+        SmartDashboard.putNumber("TurnMotor backright angle", this.backRight.getTurnEncoder());
+
+        SmartDashboard.putNumber("DriveMotor frontLeft output", this.frontLeft.getDriveVelocity());
+        SmartDashboard.putNumber("DriveMotor frontRigh output", this.frontRight.getDriveVelocity());
+        SmartDashboard.putNumber("DriveMotor backLeft output", this.backLeft.getDriveVelocity());
+        SmartDashboard.putNumber("DriveMotor backright output", this.backRight.getDriveVelocity());
+
+        SmartDashboard.putNumber("Gyro value", getAngle());
 
         DataLogManager.start();
         DriverStation.startDataLog(DataLogManager.getLog());

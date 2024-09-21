@@ -7,39 +7,46 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
+import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.ClimberCommands.ClimbCommand;
 import frc.robot.commands.IntakeCommands.IntakePivotAutomatically;
 import frc.robot.commands.IntakeCommands.IntakeRollersMoveManually;
-import frc.robot.commands.ShooterCommands.ShootNoteCommand;
+import frc.robot.commands.ShooterCommands.AimbotCommand;
+import frc.robot.commands.ShooterCommands.ShootCommand;
+import frc.robot.subsystems.Climber.Climber;
 import frc.robot.subsystems.Drive.Drive;
 import frc.robot.subsystems.Intake.Intake;
 import frc.robot.subsystems.Intake.Intake.PivotPosition;
 import frc.robot.subsystems.Shooter.Shooter;
+import frc.robot.utils.OverrideSwitches;
 
 public class RobotContainer {
   // Subsystems
   public Drive drive = new Drive();
   public Intake intake = new Intake();
   public Shooter shooter = new Shooter(intake);
+  public Climber climber = new Climber();
+  public OverrideSwitches overrides = new OverrideSwitches(5);
 
-  // IntakePivotAutomatically intakeCommand = new IntakePivotAutomatically(intake, null);
 
   // Controllers
   public static final CommandPS4Controller driverController = new CommandPS4Controller(0);
   public static final CommandPS4Controller operatorController = new CommandPS4Controller(1);
+  // private final Trigger robotRelative = overrides.driverSwitch(0);
+  boolean robotRelative = false;
 
-  // private final Alert driverDisconnected = new Alert("Driver controller disconnected (this is a test).", AlertType.WARNING);
-  // private final Alert testing = new Alert("testing this", AlertType.ERROR);
-  // private final Alert driverDisconnected = new Alert();
+  // private final Alert driverControllerDisconnected = new Alert("Driver controller disconnected (Port 0).", AlertType.WARNING);
+  // private final Alert operatorControllerDisconnected = new Alert("Operator controller disconnected (Port 1).", AlertType.WARNING);
+  
+  // public void checkControllersConnection() {
+  //   driverControllerDisconnected.set(!DriverStation.isJoystickConnected(driverController.getHID().getPort()));
+  //   operatorControllerDisconnected.set(!DriverStation.isJoystickConnected(operatorController.getHID().getPort()));
+  // }
 
   public RobotContainer() {
     configureBindings();
-
-    /*
-    driverDisconnected.set(true);
-    testing.set(true);
-  */
   }
 
   private void configureBindings() {
@@ -47,18 +54,28 @@ public class RobotContainer {
     drive.setDefaultCommand(
       new DriveCommand(
         drive,
-        () -> (-driverController.getLeftX()),
-        () -> (driverController.getLeftY()),
-        () -> (-driverController.getRightX())
+        () -> (-driverController.getLeftY()),
+        () -> (driverController.getLeftX()),
+        () -> (-driverController.getRightX()),
+        robotRelative
       )
     );
 
-    // // driverController.cross().onTrue();
+    driverController.L1().toggleOnTrue(
+      new DriveCommand(
+        drive,
+        () -> (-driverController.getLeftY()),
+        () -> (driverController.getLeftX()),
+        () -> (-driverController.getRightX()),
+        true
+      )
+    );
 
     driverController.triangle().whileTrue(new InstantCommand(() -> drive.zeroHeading()));
     driverController.R2().whileTrue(new IntakePivotAutomatically(intake, PivotPosition.FLOOR))
                         .whileFalse(new IntakePivotAutomatically(intake, PivotPosition.SHOOTER));
 
+    driverController.cross().whileTrue(new AimbotCommand(drive, shooter, intake));
     
     // ----------- Operator Controller -----------
     operatorController.R2().whileTrue(new IntakeRollersMoveManually(intake, IntakeConstants.intakeRollersMotorVelocityThrow));
@@ -67,11 +84,13 @@ public class RobotContainer {
     operatorController.povLeft().whileTrue(new IntakePivotAutomatically(intake, PivotPosition.FLOOR))
                                 .whileFalse(new IntakePivotAutomatically(intake, PivotPosition.SHOOTER));
 
-    operatorController.R1().whileTrue(new IntakePivotAutomatically(intake, PivotPosition.AMP));
-    operatorController.L1().whileTrue(new IntakePivotAutomatically(intake, PivotPosition.SHOOTER));
+    operatorController.R1().toggleOnTrue(new IntakePivotAutomatically(intake, PivotPosition.AMP));
+    operatorController.L1().toggleOnTrue(new IntakePivotAutomatically(intake, PivotPosition.SHOOTER));
 
-    operatorController.triangle().toggleOnTrue(new ShootNoteCommand(shooter, intake));
+    operatorController.triangle().toggleOnTrue(new ShootCommand(shooter, intake));
 
+    operatorController.povUp().whileTrue(new ClimbCommand(climber, ClimberConstants.rise));
+    operatorController.povDown().whileTrue(new ClimbCommand(climber, ClimberConstants.lower));
   }
 
   public Command getAutonomousCommand() {
@@ -81,5 +100,9 @@ public class RobotContainer {
 
   public Drive getChasisSubsystem() {
     return drive;
+  }
+
+  public Intake getIntakeSubsystem() {
+    return intake;
   }
 }

@@ -17,8 +17,8 @@ public class Shooter extends SubsystemBase{
   public Shooter(Intake s_intake) {
     this.s_intake = s_intake;
 
-    shooterLowerMotor.setInverted(false);
-    shooterUpperMotor.setInverted(false);
+    shooterLowerMotor.setInverted(true);
+    shooterUpperMotor.setInverted(true);
 
     shooterLowerMotor.setIdleMode(IdleMode.kCoast);
     shooterUpperMotor.setIdleMode(IdleMode.kCoast);

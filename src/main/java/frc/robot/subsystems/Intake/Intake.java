@@ -129,7 +129,7 @@ private double desaturatePIDValue(double s_PIDvalue) {
   public void rollIntake(double intakeRollersVelocity, boolean intakeAutomativally, boolean activateSecutirySystem) {    
     if (activateSecutirySystem == true && getInfraredSensorValue() == true && intakeRollersVelocity < -0.4) {
         timeForIntaking.start();
-        if (timeForIntaking.get() >= 0.5) {
+        if (timeForIntaking.get() >= IntakeConstants.timeForIntaking) {
         stopIntakeRollers();
         timeForIntaking.reset();
         }
@@ -138,13 +138,17 @@ private double desaturatePIDValue(double s_PIDvalue) {
     }
   }
 
-  // Must indicate the parameter which gives the option to follow the feedback from the IR sensor
+  public void pivotMotorSecuritySystem() {
+    if (intakePivotMotor.getOutputCurrent() > 10){
+      stopIntakePivotMotor();
+    }
+  }
 
   public void periodic() {
-    // 
+    pivotMotorSecuritySystem();
+
     SmartDashboard.putNumber("Time for intaking", timeForIntaking.get());
     SmartDashboard.putNumber("Pivot motor output current", intakePivotMotor.getOutputCurrent());
-    SmartDashboard.putNumber("a", intakePivotMotor.getEncoder().getPosition());
 
     SmartDashboard.putBoolean("Note detected", getInfraredSensorValue());
     SmartDashboard.putNumber("Pivot angle", getIntakeEncoderPosition());
