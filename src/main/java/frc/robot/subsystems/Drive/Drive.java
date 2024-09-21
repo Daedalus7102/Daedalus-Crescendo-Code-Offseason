@@ -6,6 +6,7 @@ import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
 import com.pathplanner.lib.util.ReplanningConfig;
 
+import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -21,6 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.SwerveDriveConstants;
+import frc.robot.utils.LimelightHelpers;
 
 public class Drive extends SubsystemBase {
 
@@ -211,8 +213,9 @@ public class Drive extends SubsystemBase {
         SmartDashboard.putNumber("DriveMotor frontRigh output", this.frontRight.getDriveVelocity());
         SmartDashboard.putNumber("DriveMotor backLeft output", this.backLeft.getDriveVelocity());
         SmartDashboard.putNumber("DriveMotor backright output", this.backRight.getDriveVelocity());
-
         SmartDashboard.putNumber("Gyro value", getAngle());
+
+        SmartDashboard.putData("Field", field);
 
         DataLogManager.start();
         DriverStation.startDataLog(DataLogManager.getLog());

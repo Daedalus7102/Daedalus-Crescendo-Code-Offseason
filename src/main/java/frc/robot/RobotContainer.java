@@ -33,7 +33,6 @@ public class RobotContainer {
   public Climber climber = new Climber();
   public OverrideSwitches overrides = new OverrideSwitches(5);
 
-
   // Controllers
   public static final CommandPS4Controller driverController = new CommandPS4Controller(0);
   public static final CommandPS4Controller operatorController = new CommandPS4Controller(1);
@@ -43,11 +42,6 @@ public class RobotContainer {
   private final Alert driverControllerDisconnected = new Alert("Driver controller disconnected (Port 0).", AlertType.WARNING);
   private final Alert operatorControllerDisconnected = new Alert("Operator controller disconnected (Port 1).", AlertType.WARNING);
   
-  // public void checkControllersConnection() {
-  //   driverControllerDisconnected.set(!DriverStation.isJoystickConnected(driverController.getHID().getPort()));
-  //   operatorControllerDisconnected.set(!DriverStation.isJoystickConnected(operatorController.getHID().getPort()));
-  // }
-
   public RobotContainer() {
     configureBindings();
   }
