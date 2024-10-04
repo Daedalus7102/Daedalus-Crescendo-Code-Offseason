@@ -4,7 +4,12 @@
 
 package frc.robot;
 
+import com.pathplanner.lib.auto.AutoBuilder;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import com.pathplanner.lib.auto.NamedCommands;
+
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
@@ -22,8 +27,8 @@ import frc.robot.subsystems.Intake.Intake;
 import frc.robot.subsystems.Intake.Intake.PivotPosition;
 import frc.robot.subsystems.Shooter.Shooter;
 import frc.robot.utils.Alert;
-import frc.robot.utils.OverrideSwitches;
 import frc.robot.utils.Alert.AlertType;
+import frc.robot.utils.OverrideSwitches;
 
 public class RobotContainer {
   // Subsystems
@@ -36,13 +41,22 @@ public class RobotContainer {
   // Controllers
   public static final CommandPS4Controller driverController = new CommandPS4Controller(0);
   public static final CommandPS4Controller operatorController = new CommandPS4Controller(1);
-  // private final Trigger robotRelative = overrides.driverSwitch(0);
-  boolean robotRelative = false;
+  private final SendableChooser<Command> autoChooser;
 
+  // private final Trigger robotRelative = overrides.driverSwitch(0);
   private final Alert driverControllerDisconnected = new Alert("Driver controller disconnected (Port 0).", AlertType.WARNING);
   private final Alert operatorControllerDisconnected = new Alert("Operator controller disconnected (Port 1).", AlertType.WARNING);
   
   public RobotContainer() {
+    NamedCommands.registerCommand("SHOOT", new ShootCommand(shooter, intake).withTimeout(0.8));
+    NamedCommands.registerCommand("LOWER_INTAKE", new IntakePivotAutomatically(intake, PivotPosition.FLOOR).withTimeout(1.2));
+    NamedCommands.registerCommand("RISE_INTAKE", new IntakePivotAutomatically(intake, PivotPosition.SHOOTER));
+    NamedCommands.registerCommand("AIMBOT", new AimbotCommand(drive, shooter, intake).withTimeout(4));
+
+    autoChooser = AutoBuilder.buildAutoChooser();
+    SmartDashboard.putData("Auto Mode", autoChooser);
+
+
     configureBindings();
   }
 
@@ -54,7 +68,7 @@ public class RobotContainer {
         () -> (-driverController.getLeftY()),
         () -> (driverController.getLeftX()),
         () -> (-driverController.getRightX()),
-        robotRelative
+        false
       )
     );
 
@@ -95,7 +109,7 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     // Reads the information sent from the auto chooser
-    return null;
+    return autoChooser.getSelected();
   }
 
   public Drive getChasisSubsystem() {
