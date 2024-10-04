@@ -1,0 +1,37 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.38,
+      "y": 5.56
+    },
+    "rotation": 180.0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "GrabNoteCenter"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "GrabNoteSource"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "ShootNoteSource"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}
