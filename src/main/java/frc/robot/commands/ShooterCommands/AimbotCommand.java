@@ -66,7 +66,7 @@ public class AimbotCommand extends Command{
   @Override
   public void execute() {    
     shooterTimmer.start();
-    s_shooter.moveShooterRollers(-ShooterConstants.shooterMotorVelocity);
+    s_shooter.moveShooterRollers(ShooterConstants.shooterMotorVelocity);
 
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     NetworkTableEntry tx = table.getEntry("tx");

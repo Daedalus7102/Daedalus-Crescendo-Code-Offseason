@@ -39,7 +39,7 @@ public class Constants {
         public static final double driveRPS2MPS = driveRevsToMeters;
 
         //Variable setting the maximum speed of the modules (Used in "Chassi" class)
-        public static final double chassisMaxOutput = 0.9;
+        public static final double chassisMaxOutput = 0.6;
 
         public static final double kPhysicalMaxSpeedMetersPerSecond = 15;
         public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
@@ -75,8 +75,8 @@ public class Constants {
         public static final double Intake_kI = 0;
         public static final double Intake_kD = 0;
 
-        public static final double intakeOffset = -45.87890625;
-        public static final double timeForIntaking = 0.7;
+        public static final double intakeOffset = 5.7;
+        public static final double timeForIntaking = 0.8;
     }
 
     public static final class ShooterConstants {

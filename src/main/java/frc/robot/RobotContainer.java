@@ -49,7 +49,7 @@ public class RobotContainer {
   
   public RobotContainer() {
     NamedCommands.registerCommand("SHOOT", new ShootCommand(shooter, intake).withTimeout(0.8));
-    NamedCommands.registerCommand("LOWER_INTAKE", new IntakePivotAutomatically(intake, PivotPosition.FLOOR).withTimeout(1.2));
+    NamedCommands.registerCommand("LOWER_INTAKE", new IntakePivotAutomatically(intake, PivotPosition.FLOOR).withTimeout(2));
     NamedCommands.registerCommand("RISE_INTAKE", new IntakePivotAutomatically(intake, PivotPosition.SHOOTER));
     NamedCommands.registerCommand("AIMBOT", new AimbotCommand(drive, shooter, intake).withTimeout(4));
 
@@ -65,19 +65,19 @@ public class RobotContainer {
     drive.setDefaultCommand(
       new DriveCommand(
         drive,
-        () -> (-driverController.getLeftY()),
-        () -> (driverController.getLeftX()),
-        () -> (-driverController.getRightX()),
+        () -> (driverController.getLeftY()),
+        () -> (-driverController.getLeftX()),
+        () -> (driverController.getRightX()),
         false
       )
     );
 
-    driverController.L1().toggleOnTrue(
+    driverController.L1().whileTrue(
       new DriveCommand(
         drive,
-        () -> (-driverController.getLeftY()),
-        () -> (driverController.getLeftX()),
-        () -> (-driverController.getRightX()),
+        () -> (driverController.getLeftY()),
+        () -> (-driverController.getLeftX()),
+        () -> (driverController.getRightX()),
         true
       )
     );
