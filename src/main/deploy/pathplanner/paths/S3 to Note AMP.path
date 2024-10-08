@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.37,
-        "y": 5.55
+        "x": 1.884164908472336,
+        "y": 5.918103237631654
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.733224207189155,
-        "y": 5.81199475789265
+        "x": 2.247389115661491,
+        "y": 6.180097995524305
       },
       "isLocked": false,
-      "linkedName": "Start 2"
+      "linkedName": "S3"
     },
     {
       "anchor": {
@@ -39,17 +39,11 @@
   "eventMarkers": [
     {
       "name": "Shoot and Lower Intake",
-      "waypointRelativePos": 0.05,
+      "waypointRelativePos": 0.0,
       "command": {
         "type": "sequential",
         "data": {
           "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "SHOOT"
-              }
-            },
             {
               "type": "named",
               "data": {

@@ -1,0 +1,52 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.3381784483283943,
+        "y": 5.498863634306841
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.5526731290992286,
+        "y": 5.635360249342828
+      },
+      "isLocked": false,
+      "linkedName": "Start 2"
+    },
+    {
+      "anchor": {
+        "x": 1.884164908472336,
+        "y": 5.918103237631654
+      },
+      "prevControl": {
+        "x": 1.7086692605689264,
+        "y": 5.781606622595669
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "S3"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 0.9,
+    "maxAcceleration": 0.9,
+    "maxAngularVelocity": 360.0,
+    "maxAngularAcceleration": 360.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -159.1932089872888,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "AMP note",
+  "previewStartingState": {
+    "rotation": 180.0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}
