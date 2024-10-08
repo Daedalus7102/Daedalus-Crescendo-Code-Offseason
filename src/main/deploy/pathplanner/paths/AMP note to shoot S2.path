@@ -8,29 +8,47 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.189296230444312,
-        "y": 6.373314171129768
+        "x": 2.386279555167806,
+        "y": 6.417378052147409
       },
       "isLocked": false,
-      "linkedName": "AMP note"
+      "linkedName": "AMP note grab from 2"
     },
     {
       "anchor": {
-        "x": 1.721530052746715,
-        "y": 5.964018765644369
+        "x": 1.8469149981778226,
+        "y": 6.00876853927621
       },
       "prevControl": {
-        "x": 2.189296230444312,
-        "y": 6.3616200166873265
+        "x": 2.0430475643559984,
+        "y": 6.139523583394994
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "S2"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "Rise Intake",
+      "waypointRelativePos": 0,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "RISE_INTAKE"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 0.9,
     "maxAcceleration": 0.9,
@@ -39,13 +57,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 12.528807709151613,
+    "rotation": -163.072486935853,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Center",
+  "folder": "AMP note",
   "previewStartingState": {
-    "rotation": 48.012787504183315,
+    "rotation": -130.0,
     "velocity": 0
   },
   "useDefaultConstraints": true
