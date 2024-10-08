@@ -49,8 +49,8 @@ public class RobotContainer {
   
   public RobotContainer() {
     NamedCommands.registerCommand("SHOOT", new ShootCommand(shooter, intake).withTimeout(0.8));
-    NamedCommands.registerCommand("LOWER_INTAKE", new IntakePivotAutomatically(intake, PivotPosition.FLOOR).withTimeout(2));
-    NamedCommands.registerCommand("RISE_INTAKE", new IntakePivotAutomatically(intake, PivotPosition.SHOOTER));
+    NamedCommands.registerCommand("LOWER_INTAKE", new IntakePivotAutomatically(intake, PivotPosition.FLOOR, false).withTimeout(2));
+    NamedCommands.registerCommand("RISE_INTAKE", new IntakePivotAutomatically(intake, PivotPosition.SHOOTER, false));
     NamedCommands.registerCommand("AIMBOT", new AimbotCommand(drive, shooter, intake).withTimeout(4));
 
     autoChooser = AutoBuilder.buildAutoChooser();
@@ -83,8 +83,8 @@ public class RobotContainer {
     );
 
     driverController.triangle().whileTrue(new InstantCommand(() -> drive.zeroHeading()));
-    driverController.R2().whileTrue(new IntakePivotAutomatically(intake, PivotPosition.FLOOR))
-                        .whileFalse(new IntakePivotAutomatically(intake, PivotPosition.SHOOTER));
+    driverController.R2().whileTrue(new IntakePivotAutomatically(intake, PivotPosition.FLOOR, true))
+                        .whileFalse(new IntakePivotAutomatically(intake, PivotPosition.SHOOTER, false));
 
     driverController.cross().whileTrue(new AimbotCommand(drive, shooter, intake));
     
@@ -92,11 +92,11 @@ public class RobotContainer {
     operatorController.R2().whileTrue(new IntakeRollersMoveManually(intake, IntakeConstants.intakeRollersMotorVelocityThrow));
     operatorController.L2().whileTrue(new IntakeRollersMoveManually(intake, IntakeConstants.intakeRollersMotorVelocitySuck));
 
-    operatorController.povLeft().whileTrue(new IntakePivotAutomatically(intake, PivotPosition.FLOOR))
-                                .whileFalse(new IntakePivotAutomatically(intake, PivotPosition.SHOOTER));
+    operatorController.povLeft().whileTrue(new IntakePivotAutomatically(intake, PivotPosition.FLOOR, true))
+                                .whileFalse(new IntakePivotAutomatically(intake, PivotPosition.SHOOTER, false));
 
-    operatorController.R1().toggleOnTrue(new IntakePivotAutomatically(intake, PivotPosition.AMP));
-    operatorController.L1().toggleOnTrue(new IntakePivotAutomatically(intake, PivotPosition.SHOOTER));
+    operatorController.R1().toggleOnTrue(new IntakePivotAutomatically(intake, PivotPosition.AMP, false));
+    operatorController.L1().toggleOnTrue(new IntakePivotAutomatically(intake, PivotPosition.SHOOTER, false));
 
     operatorController.triangle().toggleOnTrue(new ShootCommand(shooter, intake));
 

@@ -116,13 +116,13 @@ private double desaturatePIDValue(double s_PIDvalue) {
   
   private void rollIntakeAutomatically(double intakeRollersVelocity, boolean intakeAutomativally){
     if (intakeAutomativally == true) {
-        if (getIntakeEncoderPosition() <= 35 && getIntakeEncoderPosition() >= 11 && goalIntakePosition == "Floor"){
+        if (getIntakeEncoderPosition() <= 35 && getIntakeEncoderPosition() >= 12 && goalIntakePosition == "Floor"){
         intakeRollersMotor.set(intakeRollersVelocity);
         } else{
         stopIntakeRollers();
         }
     } else {
-        intakeRollersMotor.set(intakeRollersVelocity);
+      intakeRollersMotor.set(intakeRollersVelocity);
     }
   }
 
@@ -130,23 +130,15 @@ private double desaturatePIDValue(double s_PIDvalue) {
     if (activateSecutirySystem == true && getInfraredSensorValue() == true && intakeRollersVelocity < -0.4) {
         timeForIntaking.start();
         if (timeForIntaking.get() >= IntakeConstants.timeForIntaking) {
-        stopIntakeRollers();
-        timeForIntaking.reset();
+          stopIntakeRollers();
+          timeForIntaking.reset();
         }
     } else {
       rollIntakeAutomatically(intakeRollersVelocity, intakeAutomativally);
     }
   }
 
-  public void pivotMotorSecuritySystem() {
-    if (intakePivotMotor.getOutputCurrent() > 10){
-      stopIntakePivotMotor();
-    }
-  }
-
   public void periodic() {
-    pivotMotorSecuritySystem();
-
     SmartDashboard.putNumber("Time for intaking", timeForIntaking.get());
     SmartDashboard.putNumber("Pivot motor output current", intakePivotMotor.getOutputCurrent());
 

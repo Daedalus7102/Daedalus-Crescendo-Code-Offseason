@@ -12,9 +12,9 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "Start at 2 to Note AMP"
+            "name": "LOWER_INTAKE"
           }
         }
       ]

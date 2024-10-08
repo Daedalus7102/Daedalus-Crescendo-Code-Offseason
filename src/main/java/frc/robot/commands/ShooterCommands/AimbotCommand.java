@@ -80,7 +80,7 @@ public class AimbotCommand extends Command{
     if(found == 1){
         double zSpeed = calibrateX(x);
         double ySpeed = calibrateY(y);
-        s_drive.setFieldOrientedSpeed(-ySpeed, 0, -zSpeed);
+        s_drive.setFieldOrientedSpeed(ySpeed, 0, zSpeed);
 
         if(Math.abs(x - AimbotConstants.targetTXAimbotSpeaker) <= AimbotConstants.xAprilTagThreshold
         && Math.abs(y - AimbotConstants.targetTYAimbotSpeaker) <= AimbotConstants.yApriltagThreshold

@@ -11,10 +11,12 @@ import frc.robot.subsystems.Intake.Intake.PivotPosition;
   public class IntakePivotAutomatically extends Command {
     private final Intake s_intake;
     private final PivotPosition pivot_position;
+    private boolean activateSecutirySystem;
 
-    public IntakePivotAutomatically(Intake s_intake, PivotPosition pivot_position) {
+    public IntakePivotAutomatically(Intake s_intake, PivotPosition pivot_position, boolean activateSecutirySystem) {
       this.s_intake = s_intake;
       this.pivot_position = pivot_position;
+      this.activateSecutirySystem = activateSecutirySystem;
       addRequirements(s_intake);
     }
 
@@ -26,7 +28,7 @@ import frc.robot.subsystems.Intake.Intake.PivotPosition;
     @Override
     public void execute() {
       s_intake.setIntakePivotPosition(pivot_position);
-      s_intake.rollIntake(IntakeConstants.intakeRollersMotorVelocitySuck, true, true);
+      s_intake.rollIntake(IntakeConstants.intakeRollersMotorVelocitySuck, true, activateSecutirySystem);
     }
 
     // Called once the command ends or is interrupted.
@@ -34,6 +36,7 @@ import frc.robot.subsystems.Intake.Intake.PivotPosition;
     public void end(boolean interrupted) {
       s_intake.stopIntakePivotMotor();
       s_intake.stopIntakeRollers();
+      s_intake.timeForIntaking.stop();
       s_intake.timeForIntaking.reset();
     }
 

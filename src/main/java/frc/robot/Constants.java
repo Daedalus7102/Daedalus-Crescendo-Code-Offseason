@@ -41,7 +41,7 @@ public class Constants {
         //Variable setting the maximum speed of the modules (Used in "Chassi" class)
         public static final double chassisMaxOutput = 0.6;
 
-        public static final double kPhysicalMaxSpeedMetersPerSecond = 15;
+        public static final double kPhysicalMaxSpeedMetersPerSecond = 10;
         public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
 
         public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond / 4;
