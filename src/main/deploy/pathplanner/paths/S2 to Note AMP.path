@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 2.5752033270448305,
-        "y": 6.642279723305886
+        "x": 2.586147500085975,
+        "y": 6.6493351038958615
       },
       "prevControl": {
-        "x": 2.3530084265048563,
-        "y": 6.548740658597193
+        "x": 2.4496508850499894,
+        "y": 6.42509066490817
       },
       "nextControl": null,
       "isLocked": false,
@@ -67,7 +67,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "AMP note",
+  "folder": "Center",
   "previewStartingState": {
     "rotation": 180.0,
     "velocity": 0

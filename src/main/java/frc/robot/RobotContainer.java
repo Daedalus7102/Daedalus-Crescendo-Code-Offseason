@@ -48,9 +48,9 @@ public class RobotContainer {
   private final Alert operatorControllerDisconnected = new Alert("Operator controller disconnected (Port 1).", AlertType.WARNING);
   
   public RobotContainer() {
-    NamedCommands.registerCommand("SHOOT", new ShootCommand(shooter, intake).withTimeout(0.8));
+    NamedCommands.registerCommand("SHOOT", new ShootCommand(shooter, intake).withTimeout(1));
     NamedCommands.registerCommand("LOWER_INTAKE", new IntakePivotAutomatically(intake, PivotPosition.FLOOR, false).withTimeout(2));
-    NamedCommands.registerCommand("RISE_INTAKE", new IntakePivotAutomatically(intake, PivotPosition.SHOOTER, false));
+    NamedCommands.registerCommand("RISE_INTAKE", new IntakePivotAutomatically(intake, PivotPosition.SHOOTER, false).withTimeout(0.5));
     NamedCommands.registerCommand("AIMBOT", new AimbotCommand(drive, shooter, intake).withTimeout(4));
 
     autoChooser = AutoBuilder.buildAutoChooser();

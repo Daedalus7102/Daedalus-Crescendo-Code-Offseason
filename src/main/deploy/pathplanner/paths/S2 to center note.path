@@ -3,37 +3,37 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.586147500085975,
-        "y": 6.6493351038958615
-      },
-      "prevControl": null,
-      "nextControl": {
-        "x": 2.3972237282089504,
-        "y": 6.424433432737385
-      },
-      "isLocked": false,
-      "linkedName": "AMP note grab from 2"
-    },
-    {
-      "anchor": {
         "x": 1.884164908472336,
         "y": 5.918103237631654
       },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.884164908472336,
+        "y": 5.830355413679948
+      },
+      "isLocked": false,
+      "linkedName": "S3"
+    },
+    {
+      "anchor": {
+        "x": 2.2839049953634363,
+        "y": 5.606110974692258
+      },
       "prevControl": {
-        "x": 2.0802974746505116,
-        "y": 6.048858281750438
+        "x": 1.7281687770026388,
+        "y": 5.567111941824833
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "S3"
+      "linkedName": "center note"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Rise Intake",
-      "waypointRelativePos": 0,
+      "name": "New Event Marker",
+      "waypointRelativePos": 0.0,
       "command": {
         "type": "sequential",
         "data": {
@@ -41,7 +41,7 @@
             {
               "type": "named",
               "data": {
-                "name": "RISE_INTAKE"
+                "name": "LOWER_INTAKE"
               }
             }
           ]
@@ -57,13 +57,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -163.072486935853,
+    "rotation": 180.0,
     "rotateFast": false
   },
   "reversed": false,
   "folder": "Center",
   "previewStartingState": {
-    "rotation": -130.0,
+    "rotation": -168.6900675259797,
     "velocity": 0
   },
   "useDefaultConstraints": true

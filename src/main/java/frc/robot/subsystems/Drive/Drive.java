@@ -172,8 +172,8 @@ public class Drive extends SubsystemBase {
             this::getChassisSpeeds, 
             this::runVelcAuto, 
             new HolonomicPathFollowerConfig(
-                new PIDConstants(1.7, 0, 0), 
-                new PIDConstants(1.7, 0, 0), 
+                new PIDConstants(2.7, 0, 0), 
+                new PIDConstants(3, 0, 0), 
                 4.8,
                 0.46,
                 new ReplanningConfig()

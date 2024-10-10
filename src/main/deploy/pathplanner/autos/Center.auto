@@ -26,13 +26,31 @@
         {
           "type": "path",
           "data": {
-            "pathName": "S3 to Note AMP"
+            "pathName": "S2 to Note AMP"
           }
         },
         {
           "type": "path",
           "data": {
             "pathName": "AMP note to shoot S2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SHOOT"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "S2 to center note"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "center note to s3"
           }
         },
         {

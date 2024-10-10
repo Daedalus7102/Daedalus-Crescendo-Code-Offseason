@@ -3,7 +3,9 @@
   "robotLength": 0.9,
   "holonomicMode": true,
   "pathFolders": [
-    "AMP note"
+    "Center",
+    "Test",
+    "Source"
   ],
   "autoFolders": [],
   "defaultMaxVel": 0.9,

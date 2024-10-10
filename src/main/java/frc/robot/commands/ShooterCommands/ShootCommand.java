@@ -36,6 +36,7 @@ public class ShootCommand extends Command {
   public void end(boolean interrupted) {
     s_shooter.stopShooter();
     s_intake.stopIntakeRollers();
+    shooterTimer.stop();
     shooterTimer.reset();
   }
 
