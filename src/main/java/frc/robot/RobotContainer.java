@@ -50,7 +50,7 @@ public class RobotContainer {
   public RobotContainer() {
     NamedCommands.registerCommand("SHOOT", new ShootCommand(shooter, intake).withTimeout(1));
     NamedCommands.registerCommand("LOWER_INTAKE", new IntakePivotAutomatically(intake, PivotPosition.FLOOR, false).withTimeout(2));
-    NamedCommands.registerCommand("RISE_INTAKE", new IntakePivotAutomatically(intake, PivotPosition.SHOOTER, false).withTimeout(0.5));
+    NamedCommands.registerCommand("RISE_INTAKE", new IntakePivotAutomatically(intake, PivotPosition.SHOOTER, false).withTimeout(0.7));
     NamedCommands.registerCommand("AIMBOT", new AimbotCommand(drive, shooter, intake).withTimeout(4));
 
     autoChooser = AutoBuilder.buildAutoChooser();

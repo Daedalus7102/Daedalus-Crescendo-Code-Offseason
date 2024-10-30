@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.7566125160740347,
-        "y": 5.87046553010485
+        "x": 2.3521533028814288,
+        "y": 6.707833653196999
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.7566125160740347,
-        "y": 5.782717706153144
+        "x": 2.2546557207128677,
+        "y": 6.6493351038958615
       },
       "isLocked": false,
-      "linkedName": "S3"
+      "linkedName": "Amp note"
     },
     {
       "anchor": {
-        "x": 2.247767002656512,
-        "y": 5.531335051274091
+        "x": 1.8549156338217678,
+        "y": 6.42509066490817
       },
       "prevControl": {
-        "x": 1.6920307842957145,
-        "y": 5.492336018406666
+        "x": 2.09865958924317,
+        "y": 6.561587279944157
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "center note"
+      "linkedName": "S2"
     }
   ],
   "rotationTargets": [],
@@ -33,7 +33,7 @@
   "eventMarkers": [
     {
       "name": "New Event Marker",
-      "waypointRelativePos": 0.0,
+      "waypointRelativePos": 0,
       "command": {
         "type": "sequential",
         "data": {
@@ -41,7 +41,7 @@
             {
               "type": "named",
               "data": {
-                "name": "LOWER_INTAKE"
+                "name": "RISE_INTAKE"
               }
             }
           ]
@@ -57,13 +57,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0,
+    "rotation": -151.48,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Center",
+  "folder": "Amp",
   "previewStartingState": {
-    "rotation": -168.6900675259797,
+    "rotation": -151.48,
     "velocity": 0
   },
   "useDefaultConstraints": true

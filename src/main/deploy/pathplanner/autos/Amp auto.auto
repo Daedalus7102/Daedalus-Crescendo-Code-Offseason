@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.37,
-      "y": 5.55
+      "x": 0.6654451313653237,
+      "y": 6.717583411413854
     },
-    "rotation": 180.0
+    "rotation": -118.98989551066873
   },
   "command": {
     "type": "sequential",
@@ -14,7 +14,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "start to S2"
+            "pathName": "start amp to S2"
           }
         },
         {
@@ -26,31 +26,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "S2 to Note AMP"
+            "pathName": "S2 to amp note"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "AMP note to shoot S2"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "SHOOT"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "S2 to center note"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "center note to s3"
+            "pathName": "Amp note to s2"
           }
         },
         {

@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.7044441642327478,
-      "y": 4.397140955802102
+      "x": 1.328428690111538,
+      "y": 5.557362183607978
     },
-    "rotation": 120.0
+    "rotation": 180.0
   },
   "command": {
     "type": "sequential",
@@ -14,19 +14,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Start to S4"
+            "pathName": "1"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "S4 to source note"
+            "pathName": "2"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "Source note to S4"
+            "name": "SHOOT"
           }
         }
       ]
