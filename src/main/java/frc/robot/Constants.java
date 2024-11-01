@@ -39,9 +39,9 @@ public class Constants {
         public static final double driveRPS2MPS = driveRevsToMeters;
 
         //Variable setting the maximum speed of the modules (Used in "Chassi" class)
-        public static final double chassisMaxOutput = 0.6;
+        public static final double chassisMaxOutput = 0.9;
 
-        public static final double kPhysicalMaxSpeedMetersPerSecond = 10;
+        public static final double kPhysicalMaxSpeedMetersPerSecond = 15;
         public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
 
         public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond / 4;
@@ -50,8 +50,8 @@ public class Constants {
 
 
         //Change these values accordinly to your needs (values for slew rate limiter)
-        public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 0.8;
-        public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 1.7;
+        public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 1;
+        public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 2;
 
         public static final double kDeadband = 0.05;
     }
@@ -75,7 +75,7 @@ public class Constants {
         public static final double Intake_kI = 0;
         public static final double Intake_kD = 0;
 
-        public static final double intakeOffset = 5.7;
+        public static final double intakeOffset = 7;
         public static final double timeForIntaking = 0.8;
     }
 
