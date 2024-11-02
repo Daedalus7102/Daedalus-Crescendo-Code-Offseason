@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 2.264405478929724,
+        "x": 1.8852482149408742,
         "y": 5.557362183607978
       },
       "prevControl": {
-        "x": 1.9816624906408973,
+        "x": 1.6025052266520476,
         "y": 5.537862667174266
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "s3 basic"
     }
   ],
   "rotationTargets": [],
@@ -50,7 +50,7 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 0.9,
+    "maxVelocity": 0.8,
     "maxAcceleration": 0.9,
     "maxAngularVelocity": 360.0,
     "maxAngularAcceleration": 360.0

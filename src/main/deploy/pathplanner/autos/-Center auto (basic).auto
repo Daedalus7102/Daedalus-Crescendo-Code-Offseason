@@ -14,13 +14,25 @@
         {
           "type": "path",
           "data": {
-            "pathName": "1"
+            "pathName": "center start basic to s3"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SHOOT"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "2"
+            "pathName": "s3 to center note basic"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "center note basic to s3"
           }
         },
         {

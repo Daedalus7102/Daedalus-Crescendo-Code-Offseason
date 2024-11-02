@@ -50,8 +50,8 @@ public class Constants {
 
 
         //Change these values accordinly to your needs (values for slew rate limiter)
-        public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 1;
-        public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 2;
+        public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 2;
+        public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 2.2;
 
         public static final double kDeadband = 0.05;
     }
@@ -94,7 +94,7 @@ public class Constants {
 
     public static class AimbotConstants {
         public static double targetTXAimbotSpeaker = -8.41;
-        public static double targetTYAimbotSpeaker = 1.63;
+        public static double targetTYAimbotSpeaker = 10.58;//1.63;
 
         public static final double xAprilTagThreshold = 5;
         public static final double yApriltagThreshold = 2;

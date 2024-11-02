@@ -26,9 +26,6 @@ import frc.robot.subsystems.Drive.Drive;
 import frc.robot.subsystems.Intake.Intake;
 import frc.robot.subsystems.Intake.Intake.PivotPosition;
 import frc.robot.subsystems.Shooter.Shooter;
-import frc.robot.utils.Alert;
-import frc.robot.utils.Alert.AlertType;
-import frc.robot.utils.OverrideSwitches;
 
 public class RobotContainer {
   // Subsystems
@@ -36,7 +33,6 @@ public class RobotContainer {
   public Intake intake = new Intake();
   public Shooter shooter = new Shooter(intake);
   public Climber climber = new Climber();
-  public OverrideSwitches overrides = new OverrideSwitches(5);
 
   // Controllers
   public static final CommandPS4Controller driverController = new CommandPS4Controller(0);
@@ -44,11 +40,11 @@ public class RobotContainer {
   private final SendableChooser<Command> autoChooser;
 
   // private final Trigger robotRelative = overrides.driverSwitch(0);
-  private final Alert driverControllerDisconnected = new Alert("Driver controller disconnected (Port 0).", AlertType.WARNING);
-  private final Alert operatorControllerDisconnected = new Alert("Operator controller disconnected (Port 1).", AlertType.WARNING);
+  // private final Alert driverControllerDisconnected = new Alert("Driver controller disconnected (Port 0).", AlertType.WARNING);
+  // private final Alert operatorControllerDisconnected = new Alert("Operator controller disconnected (Port 1).", AlertType.WARNING);
   
   public RobotContainer() {
-    NamedCommands.registerCommand("SHOOT", new ShootCommand(shooter, intake).withTimeout(1));
+    NamedCommands.registerCommand("SHOOT", new ShootCommand(shooter, intake).withTimeout(1.2));
     NamedCommands.registerCommand("LOWER_INTAKE", new IntakePivotAutomatically(intake, PivotPosition.FLOOR, false).withTimeout(2));
     NamedCommands.registerCommand("RISE_INTAKE", new IntakePivotAutomatically(intake, PivotPosition.SHOOTER, false).withTimeout(0.7));
     NamedCommands.registerCommand("AIMBOT", new AimbotCommand(drive, shooter, intake).withTimeout(4));
@@ -103,8 +99,8 @@ public class RobotContainer {
     operatorController.povUp().whileTrue(new ClimbCommand(climber, ClimberConstants.rise));
     operatorController.povDown().whileTrue(new ClimbCommand(climber, ClimberConstants.lower));
 
-    driverControllerDisconnected.set(!DriverStation.isJoystickConnected(driverController.getHID().getPort()));
-    operatorControllerDisconnected.set(!DriverStation.isJoystickConnected(operatorController.getHID().getPort()));
+    // driverControllerDisconnected.set(!DriverStation.isJoystickConnected(driverController.getHID().getPort()));
+    // operatorControllerDisconnected.set(!DriverStation.isJoystickConnected(operatorController.getHID().getPort()));
   }
 
   public Command getAutonomousCommand() {
