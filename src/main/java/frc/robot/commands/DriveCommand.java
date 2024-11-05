@@ -5,12 +5,14 @@ import java.util.function.Supplier;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.SwerveDriveConstants;
 import frc.robot.subsystems.Drive.Drive;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 
 public class DriveCommand extends Command{
     Drive drive;
     Supplier<Double> xSpeed, ySpeed, zSpeed;
-    private final SlewRateLimiter xLimiter, yLimiter, zLimiter;
+    private final PIDController xPID, yPID, zPID;
+    // private final SlewRateLimiter xLimiter, yLimiter, zLimiter;
     private boolean robotRelative = false;
 
     public DriveCommand(Drive drive, Supplier<Double> xSpeed, Supplier<Double> ySpeed, Supplier<Double> zSpeed, boolean robotRelative){
@@ -20,12 +22,17 @@ public class DriveCommand extends Command{
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
         this.zSpeed = zSpeed;
-
         this.robotRelative = robotRelative;
 
+        this.xPID = new PIDController(0.5, 0, 0);
+        this.yPID = new PIDController(0.5, 0, 0);
+        this.zPID = new PIDController(0.5, 0, 0);
+
+        /*
         this.xLimiter = new SlewRateLimiter(SwerveDriveConstants.kTeleDriveMaxAccelerationUnitsPerSecond);
         this.yLimiter = new SlewRateLimiter(SwerveDriveConstants.kTeleDriveMaxAccelerationUnitsPerSecond);
         this.zLimiter = new SlewRateLimiter(SwerveDriveConstants.kTeleDriveMaxAngularAccelerationUnitsPerSecond);
+        */
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -42,9 +49,15 @@ public class DriveCommand extends Command{
         zNeed = Math.abs(zNeed) > SwerveDriveConstants.kDeadband ? zNeed : 0.0;
 
         // 3. Make the driving smoother
+        xNeed = xPID.calculate(xNeed);
+        yNeed = yPID.calculate(yNeed);
+        zNeed = zPID.calculate(zNeed);
+
+        /*
         xNeed = xLimiter.calculate(xNeed) * SwerveDriveConstants.kTeleDriveMaxSpeedMetersPerSecond;; 
         yNeed = yLimiter.calculate(yNeed) * SwerveDriveConstants.kTeleDriveMaxSpeedMetersPerSecond;; 
         zNeed = zLimiter.calculate(zNeed) * SwerveDriveConstants.kTeleDriveMaxAngularSpeedRadiansPerSecond;;
+        */
         
         drive.setChassisSpeeds(xNeed, yNeed, zNeed, robotRelative);
     }

@@ -34,31 +34,16 @@ public class AutoLootNote extends Command{
 
     boolean needsXCalibration = notePos <= AutoLootConstants.targetTXAutoLoot - AutoLootConstants.xNoteThreshold 
                             || notePos >= AutoLootConstants.targetTXAutoLoot + AutoLootConstants.xNoteThreshold;
-  
-    if(Math.abs(ySpeedSupplier.get()) < 0.2){
-      ySpeed = 0;
-    } else {
-      ySpeed = 0.1 * Math.signum(ySpeed);
-    }
-
-    if(Math.abs(xSpeed) < 0.3) {
-      xSpeed = 0;
-    } else {
-      xSpeed = 0.1 * Math.signum(xSpeed);
-    }
 
     if(needsXCalibration){
       double error = (AutoLootConstants.targetTXAutoLoot) - notePos; // Calculate error
       zSpeed = AutoLootConstants.kPdriveZLoot * AutoLootConstants.zDriveMaxSpeedLoot * error / AutoLootConstants.targetTXAutoLoot; // Adjust velocity
     }
-    s_drive.setChassisSpeeds(ySpeed, xSpeed, zSpeed, true);     
+    s_drive.setChassisSpeeds(ySpeed, xSpeed, zSpeed, true);
   }
 
   @Override
   public void execute() {
-    double xSpeed = xSpeedSupplier.get();
-    double ySpeed = ySpeedSupplier.get();
-
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight-intake");
     NetworkTableEntry tx = table.getEntry("tx");
     NetworkTableEntry ty = table.getEntry("ty");
@@ -69,10 +54,10 @@ public class AutoLootNote extends Command{
     double found = table.getEntry("tv").getDouble(0);
 
     if(found == 1){
-      lootNote(x, ySpeedSupplier, xSpeedSupplier);
+      lootNote(x, xSpeedSupplier, ySpeedSupplier);
       SmartDashboard.putNumber("Required distance X", x - AutoLootConstants.targetTXAutoLoot);
     } else {
-      s_drive.setChassisSpeeds(0, 0, 0, true);
+      s_drive.setChassisSpeeds(ySpeedSupplier.get(), xSpeedSupplier.get(), 0, true);
     }
   }
 

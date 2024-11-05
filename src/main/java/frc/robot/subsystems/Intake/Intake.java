@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.IntakeConstants;
 
 public class Intake extends SubsystemBase{
-  private final CANSparkMax intakePivotMotor = new CANSparkMax(IntakeConstants.intakePivotMotorID, MotorType.kBrushless);//9
-  private final CANSparkMax intakeRollersMotor = new CANSparkMax(IntakeConstants.intakeRollersMotorID, MotorType.kBrushless);//10
+  private final CANSparkMax intakePivotMotor = new CANSparkMax(IntakeConstants.intakePivotMotorID, MotorType.kBrushless); // 9
+  private final CANSparkMax intakeRollersMotor = new CANSparkMax(IntakeConstants.intakeRollersMotorID, MotorType.kBrushless); // 10
     
   private final DigitalInput infraredSensor =  new DigitalInput(IntakeConstants.infraredSensorChannel);
 
@@ -52,7 +52,7 @@ public class Intake extends SubsystemBase{
     return !infraredSensor.get();
   }
 
-  //Security method to avoid the intake from lowering more than expected
+  // Security method to avoid the intake from lowering more than expected
   private double getIntakeEncoderPosition() {
     intakeAngle = pivotCANCoder.getAbsolutePosition().getValue()*360 + IntakeConstants.intakeOffset; 
     if (intakeAngle >= 310 && intakeAngle <= 360){

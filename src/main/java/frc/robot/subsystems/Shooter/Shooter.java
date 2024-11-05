@@ -28,7 +28,6 @@ public class Shooter extends SubsystemBase{
     shooterLowerMotor.set(velocity);
     shooterUpperMotor.set(velocity);
   }
-
   /* 
    * To shoot a note in this robot, we need to spin both the shooter rollers and the
    * intake rollers, that's why in order for us to create an automatic function to
