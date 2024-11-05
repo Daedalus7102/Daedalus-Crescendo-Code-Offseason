@@ -93,15 +93,24 @@ public class Constants {
     }
 
     public static class AimbotConstants {
-        public static double targetTXAimbotSpeaker = -8.41;
-        public static double targetTYAimbotSpeaker = 10.58;//1.63;
+        public static final double targetTXAimbotSpeaker = -8.41;
+        public static final double targetTYAimbotSpeaker = 14.58;//1.63;
 
-        public static final double xAprilTagThreshold = 5;
-        public static final double yApriltagThreshold = 2;
+        public static final double xAprilTagThreshold = 4; //5;
+        public static final double yApriltagThreshold = 2; //2;
 
         public static final double zDriveMaxSpeed = 0.8;
         public static final double yDriveMaxSpeed = 0.8;
-        public static final double kPdriveY = 0.06;
-        public static final double kPdriveZ = 0.24;
+        public static final double kPdriveY = 0.4;
+        public static final double kPdriveZ = 0.3;
+    }
+
+    public static class AutoLootConstants {
+        public static final double targetTXAutoLoot = -6;
+        public static final double xNoteThreshold = 0.2;
+        public static final double zDriveMaxSpeedLoot = 0.8;
+        public static final double yDriveMaxSpeedLoot = 0.8;
+        public static final double kPdriveZLoot = 0.3;
+
     }
 }

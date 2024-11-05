@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -17,6 +18,7 @@ import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ClimberCommands.ClimbCommand;
+import frc.robot.commands.IntakeCommands.AutoLootNote;
 import frc.robot.commands.IntakeCommands.IntakePivotAutomatically;
 import frc.robot.commands.IntakeCommands.IntakeRollersMoveManually;
 import frc.robot.commands.ShooterCommands.AimbotCommand;
@@ -52,12 +54,12 @@ public class RobotContainer {
     autoChooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Auto Mode", autoChooser);
 
-
     configureBindings();
   }
 
   private void configureBindings() {
     // ----------- Driver Controller -----------
+    /*
     drive.setDefaultCommand(
       new DriveCommand(
         drive,
@@ -77,13 +79,15 @@ public class RobotContainer {
         true
       )
     );
+    */
 
     driverController.triangle().whileTrue(new InstantCommand(() -> drive.zeroHeading()));
     driverController.R2().whileTrue(new IntakePivotAutomatically(intake, PivotPosition.FLOOR, true))
                         .whileFalse(new IntakePivotAutomatically(intake, PivotPosition.SHOOTER, false));
 
     driverController.cross().whileTrue(new AimbotCommand(drive, shooter, intake));
-    
+    driverController.circle().whileTrue(new AutoLootNote(drive, intake, () -> driverController.getLeftY(), () -> -driverController.getLeftX()));
+
     // ----------- Operator Controller -----------
     operatorController.R2().whileTrue(new IntakeRollersMoveManually(intake, IntakeConstants.intakeRollersMotorVelocityThrow));
     operatorController.L2().whileTrue(new IntakeRollersMoveManually(intake, IntakeConstants.intakeRollersMotorVelocitySuck));
